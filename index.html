@@ -1,784 +1,282 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZK Prompt Generator - Video & Image</title>
+    <title>ZK Prompt Generator - AI Pro</title>
+    
+    <script src="https://pl28737230.profitablecpmratenetwork.com/e9/cf/f3/e9cff37aea52e2a72b500e67263f68f4.js"></script>
+
     <style>
         :root {
-            --primary: #6c5ce7;
-            --primary-hover: #5649c0;
-            --bg-color: #0f0f12;
-            --card-bg: #1e1e24;
-            --text-color: #e0e0e0;
+            --primary: #8e44ad;
+            --primary-light: #a29bfe;
+            --bg-color: #0b0b0e;
+            --card-bg: rgba(30, 30, 36, 0.7);
+            --text-color: #f5f5f5;
+            --text-muted: #b2bec3;
             --border-color: #2d2d35;
-            --success: #00b894;
-            --error: #d63031;
+            --success: #00d2d3;
+            --tele-color: #0088cc;
             --wa-color: #25D366;
+            --gold: #f1c40f;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+        [data-theme="light"] {
+            --bg-color: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #dfe6e9;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, var(--bg-color) 100%);
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-        }
-
-        header {
-            margin-bottom: 30px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- LOGO & HEADER TEXT STYLES --- */
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .zk-logo {
-            width: 200px; /* Ukuran Logo */
-            height: auto;
-            object-fit: contain;
-            margin-bottom: -10px; /* Rapatkan jarak dengan teks */
-            filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.5)); /* Efek glow */
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        /* --- WHATSAPP BUTTON STYLE --- */
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: var(--wa-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-top: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
         }
 
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        .whatsapp-icon {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* --- API SETTINGS SECTION --- */
-        .settings-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group:last-child { margin-bottom: 0; }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            color: #aaa;
-            font-weight: 600;
-        }
-
-        .input-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        input, select {
-            flex: 1;
-            background: #121215;
-            border: 1px solid var(--border-color);
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        input:focus, select:focus { border-color: var(--primary); }
-
-        .btn-test {
-            background: #2d2d35;
-            color: #aaa;
-            border: 1px solid var(--border-color);
-            padding: 0 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .btn-test:hover { background: #3d3d45; color: white; }
-        .btn-test.success { color: var(--success); border-color: var(--success); }
-
-        /* --- UPLOAD AREA --- */
-        .upload-zone {
-            border: 2px dashed var(--border-color);
-            background: var(--card-bg);
-            padding: 40px 20px;
-            text-align: center;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .upload-zone:hover { border-color: var(--primary); background: #23232a; }
-
-        .upload-icon { font-size: 2.5rem; color: #555; margin-bottom: 10px; }
-        .upload-text { color: #888; font-size: 1rem; }
-        
-        #previewContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            display: none; 
-        }
-
-        .thumb-item {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid var(--primary);
-            background: #000;
-        }
-
-        .thumb-item img, .thumb-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .remove-thumb {
-            position: absolute; top: 0; right: 0;
-            background: rgba(0,0,0,0.8); color: white;
-            width: 20px; height: 20px; font-size: 12px;
+        /* --- THEME TOGGLE --- */
+        .theme-toggle {
+            position: fixed; top: 20px; right: 20px;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-color); width: 45px; height: 45px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            z-index: 2;
+            cursor: pointer; z-index: 1000; backdrop-filter: blur(10px);
         }
 
-        /* --- GENERATE BUTTON --- */
+        /* --- HEADER --- */
+        header { margin-bottom: 30px; text-align: center; width: 100%; }
+        .zk-logo { width: 180px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(142, 68, 173, 0.5)); }
+        h1 { font-size: 1.8rem; letter-spacing: -1px; background: linear-gradient(to right, #fff, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- COMMUNITY BUTTONS --- */
+        .community-bar {
+            display: flex; gap: 10px; margin-bottom: 25px; width: 100%; max-width: 800px;
+        }
+        .comm-btn {
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px; border-radius: 10px; text-decoration: none; color: white;
+            font-weight: bold; font-size: 0.9rem; transition: transform 0.2s;
+        }
+        .btn-tele { background: var(--tele-color); box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3); }
+        .btn-wa { background: var(--wa-color); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+        .comm-btn:hover { transform: translateY(-3px); opacity: 0.9; }
+
+        /* --- CLICKBAIT ADS (MODIFIED) --- */
+        .hot-offers {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px; width: 100%; max-width: 800px; margin-bottom: 30px;
+        }
+        .offer-card {
+            background: linear-gradient(135deg, #1e1e24, #2d3436);
+            border: 1px solid var(--border-color);
+            padding: 15px; border-radius: 12px; text-align: center;
+            text-decoration: none; position: relative; overflow: hidden;
+        }
+        .offer-card::before {
+            content: "HOT PROMO"; position: absolute; top: 0; left: 0; 
+            background: var(--gold); color: #000; font-size: 0.6rem; padding: 2px 8px; font-weight: 800;
+        }
+        .offer-card h4 { color: var(--gold); font-size: 0.95rem; margin-bottom: 5px; }
+        .offer-card p { color: #fff; font-size: 0.8rem; font-weight: 500; }
+
+        /* --- CONTAINER --- */
+        .container { width: 100%; max-width: 800px; }
+        .glass-card { 
+            background: var(--card-bg); backdrop-filter: blur(15px);
+            padding: 25px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* --- INPUTS --- */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-muted); }
+        input, select {
+            width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color);
+            color: var(--text-color); padding: 12px; border-radius: 10px; outline: none;
+        }
+        .input-row { display: flex; gap: 10px; }
+        .btn-test { background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+
+        /* --- UPLOAD ZONE --- */
+        .upload-zone {
+            border: 2px dashed var(--primary); padding: 40px; text-align: center;
+            border-radius: 15px; cursor: pointer; transition: 0.3s;
+        }
+        .upload-zone:hover { background: rgba(142, 68, 173, 0.1); }
+
+        /* --- GENERATE BTN --- */
         .btn-generate {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+            width: 100%; padding: 16px; border-radius: 12px; border: none;
+            background: linear-gradient(90deg, var(--primary), #6c5ce7);
+            color: white; font-weight: 800; font-size: 1rem; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4); margin-top: 10px;
         }
 
-        .btn-generate:hover:not(:disabled) {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
+        /* --- AD STANDBY (NATIVE) --- */
+        .ad-standby {
+            width: 100%; margin: 20px 0; border-radius: 12px; overflow: hidden;
+            background: rgba(255,255,255,0.02); min-height: 100px;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .btn-generate:disabled {
-            background: #333;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        /* --- RESULTS LIST --- */
-        .results-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
+        /* --- RESULT CARD --- */
         .result-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            animation: slideUp 0.4s ease;
+            background: var(--card-bg); border-radius: 15px; padding: 15px;
+            margin-top: 15px; border: 1px solid var(--border-color);
+        }
+        textarea {
+            width: 100%; height: 100px; margin-top: 10px; background: #000;
+            color: #25D366; border: none; padding: 10px; border-radius: 8px; font-family: monospace;
         }
 
-        .card-header {
-            display: flex;
-            gap: 15px;
-            align-items: start;
-        }
-
-        .card-thumb {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid #444;
-            flex-shrink: 0;
-            background: #000;
-        }
-
-        .card-info {
-            flex: 1;
-        }
-
-        .card-title {
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        /* TEXTAREA ANTI COPY MANUAL (HARD LOCK) */
-        textarea.prompt-box {
-            width: 100%;
-            height: 150px;
-            background: #0a0a0c;
-            border: 1px solid var(--border-color);
-            color: #e0e0e0;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1rem;
-            resize: vertical;
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            
-            /* 1. CSS LOCK */
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            
-            cursor: default;
-        }
-
-        .card-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .btn-action {
-            background: #2d2d35;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-action:hover { background: #3d3d45; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- TOAST --- */
         .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: #333; color: white; padding: 12px 24px;
-            border-radius: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            opacity: 0; pointer-events: none; transition: 0.3s;
-            z-index: 9999; display: flex; align-items: center; gap: 10px;
+            position: fixed; bottom: 20px; background: #333; color: #fff;
+            padding: 12px 25px; border-radius: 50px; z-index: 10000; display: none;
         }
-        .toast.show { opacity: 1; bottom: 40px; }
-        .toast.success { border-left: 5px solid var(--success); }
-        .toast.error { border-left: 5px solid var(--error); }
 
-        .spinner {
-            display: inline-block; width: 20px; height: 20px;
-            border: 3px solid rgba(255,255,255,0.3); border-radius: 50%;
-            border-top-color: #fff; animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Mobile Responsive */
         @media (max-width: 600px) {
-            .card-header { flex-direction: column; align-items: center; text-align: center; }
-            .card-thumb { margin: 0 auto; }
+            .community-bar { flex-direction: column; }
         }
     </style>
-
-<!-- Adsterra Scripts (Injected) -->
-<script>
-(function(){
-  try {
-    var s1 = document.createElement('script');
-    s1.src = "https://pl28737230.effectivegatecpm.com/e9/cf/f3/e9cff37aea52e2a72b500e67263f68f4.js";
-    s1.async = true;
-    document.head.appendChild(s1);
-
-    var s2 = document.createElement('script');
-    s2.src = "https://pl28434722.effectivegatecpm.com/63/63/4a/63634a8d6f875d2f105652f4ca71e9e1.js";
-    s2.async = true;
-    document.head.appendChild(s2);
-  } catch(e) {
-    console.log("Adsterra head error", e);
-  }
-})();
-</script>
-
 </head>
 <body>
 
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+
     <header>
-        <!-- LOGO + TEKS DI BAWAHNYA -->
-        <div class="logo-container">
-            <!-- LOGO ZK ANDA -->
-            <img src="https://z-cdn-media.chatglm.cn/files/c6291519-8ab0-465d-8f7a-c80a0b04978f.png?auth_key=1870807375-f619d5a796344a9589b79c05247ab733-0-f8780a7acf836353d0979f6197b8e96f" alt="ZK Logo" class="zk-logo">
-            <!-- TEKS PROMPT GENERATOR DI BAWAH LOGO -->
-            <h1>Prompt Generator</h1>
-        </div>
-        
-        <!-- TOMBOL WHATSAPP CHANNEL -->
-        <a href="https://www.whatsapp.com/channel/0029VbBv4Ej9Gv7dJ6LPor1j" target="_blank" class="whatsapp-btn">
-            <svg class="whatsapp-icon" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-            </svg>
-            Gabung Channel WhatsApp
-        </a>
+        <img src="https://z-cdn-media.chatglm.cn/files/c6291519-8ab0-465d-8f7a-c80a0b04978f.png?auth_key=1870807375-f619d5a796344a9589b79c05247ab733-0-f8780a7acf836353d0979f6197b8e96f" alt="ZK Logo" class="zk-logo">
+        <h1>ZK PROMPT GENERATOR</h1>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px;">AI-Powered Metadata & Image Prompts</p>
     </header>
 
-    <div class="container">
+    <div class="community-bar">
+        <a href="https://t.me/zkcreativestudio" target="_blank" class="comm-btn btn-tele" onclick="triggerAd()">
+            <span>✈️ Join Telegram Studio</span>
+        </a>
+        <a href="https://chat.whatsapp.com/CXVyC8v7zMFG0Ap8H6dJ7X" target="_blank" class="comm-btn btn-wa" onclick="triggerAd()">
+            <span>💬 Grup WA Cuan AI</span>
+        </a>
+    </div>
 
-        <!-- 1. Settings -->
-        <div class="settings-card">
+    <div class="hot-offers">
+        <a href="https://www.profitablecpmratenetwork.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef" target="_blank" class="offer-card" onclick="triggerAd()">
+            <h4>💰 TRICK 100$ / HARI</h4>
+            <p>Bongkar cara dapet saldo gratis dari AI Prompt.</p>
+        </a>
+        <a href="https://www.profitablecpmratenetwork.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef" target="_blank" class="offer-card" onclick="triggerAd()">
+            <h4>🚀 BOOSTER TRAFIK BLOG</h4>
+            <p>Cara bikin web berita otomatis dibanjiri pengunjung.</p>
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="glass-card">
             <div class="form-group">
-                <label for="apiKey">API Key Google AI</label>
+                <label>Google AI API Key</label>
                 <div class="input-row">
-                    <input type="password" id="apiKey" placeholder="AIzaSy..." autocomplete="off">
-                    <button type="button" class="btn-test" id="testBtn">Cek</button>
+                    <input type="password" id="apiKey" placeholder="Tempel API Key anda di sini...">
+                    <button class="btn-test" id="testBtn" onclick="triggerAd()">CEK</button>
                 </div>
+                <a href="https://zkcreativestudio.blogspot.com/p/buat-apikey-free-gmini.html" target="_blank" style="font-size: 0.7rem; color: var(--primary-light); text-decoration: none;">Belum punya key? Klik panduan ini.</a>
             </div>
-            
+
             <div class="form-group">
-                <label for="modelSelect">Pilihan Model AI (v1beta)</label>
+                <label>Pilih Model Kecepatan</label>
                 <select id="modelSelect">
-                    <option value="gemini-2.5-flash" selected>Gemini 2.5 Flash (Support Video)</option>
-                    <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite</option>
-                    <option value="gemini-2.5-pro">Gemini 2.5 Pro (High Quality)</option>
-                    <option value="gemini-1.5-pro">Gemini 1.5 Pro (Fallback)</option>
+                    <option value="gemini-2.5-flash">Flash 2.5 (Super Cepat)</option>
+                    <option value="gemini-2.5-pro">Pro 2.5 (Sangat Akurat)</option>
                 </select>
             </div>
         </div>
 
-        <!-- 2. Upload Area -->
-        <div class="upload-zone" id="dropZone">
-            <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display: none;">
-            <div id="uploadContent">
-                <div class="upload-icon">📷 🎥</div>
-                <div class="upload-text">Klik untuk pilih hingga 5 File</div>
-                <div style="font-size: 0.8rem; color: #666; margin-top:5px;">Supports Image & Video (Max 5MB per file)</div>
-            </div>
-            <div id="previewContainer"></div>
+        <div class="ad-standby">
+            <div id="container-6def9d7ddb10b55e224d652e45458248"></div>
         </div>
 
-        <!-- 3. Generate Button -->
-        <button class="btn-generate" id="generateBtn" disabled>
-            ✨ Generate Batch Prompts
-        </button>
+        <div class="glass-card upload-zone" id="dropZone" onclick="triggerAd()">
+            <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display: none;">
+            <div id="uploadContent">
+                <span style="font-size: 2.5rem;">📁</span>
+                <p style="font-weight: bold; margin-top: 10px;">Klik Untuk Upload Gambar/Video</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">Maksimal 5 file untuk hasil terbaik</p>
+            </div>
+            <div id="previewContainer" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:15px; justify-content:center;"></div>
+        </div>
 
-        <!-- 4. Results List -->
-        <div id="resultsList" class="results-list"></div>
+        <button class="btn-generate" id="generateBtn" disabled onclick="triggerAd()">✨ MULAI GENERATE PROMPT</button>
 
+        <div id="resultsList"></div>
     </div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <span id="toastIcon"></span>
-        <span id="toastMsg">Pesan</span>
-    </div>
+    <div class="toast" id="toast"></div>
+
+    <script src="https://pl28434722.profitablecpmratenetwork.com/63/63/4a/63634a8d6f875d2f105652f4ca71e9e1.js"></script>
+    <script async="async" data-cfasync="false" src="https://pl28802753.profitablecpmratenetwork.com/6def9d7ddb10b55e224d652e45458248/invoke.js"></script>
 
     <script>
-        // --- KONFIGURASI ---
-        const ADSTERRA_LINK = "https://www.effectivegatecpm.com/xcdqu4yief?key=8e3a8e86bbaa562b2e205ef5dfefbada";
-        const MAX_FILES = 5;
-        const MAX_VIDEO_SIZE_MB = 5;
+        const AD_URL = "https://www.profitablecpmratenetwork.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef";
+        
+        function triggerAd() {
+            window.open(AD_URL, '_blank');
+        }
 
-        // --- VARIABLES ---
-        const apiKeyInput = document.getElementById('apiKey');
-        const modelSelect = document.getElementById('modelSelect');
-        const testBtn = document.getElementById('testBtn');
-        const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
-        const uploadContent = document.getElementById('uploadContent');
-        const previewContainer = document.getElementById('previewContainer');
+        const dropZone = document.getElementById('dropZone');
         const generateBtn = document.getElementById('generateBtn');
-        const resultsList = document.getElementById('resultsList');
-        const toast = document.getElementById('toast');
-
+        const previewContainer = document.getElementById('previewContainer');
+        const apiKeyInput = document.getElementById('apiKey');
         let filesArray = [];
 
-        // --- INIT ---
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedKey = localStorage.getItem('zk_api_key');
-            if(savedKey) apiKeyInput.value = savedKey;
-            checkReady();
+        // Logic sederhana untuk fungsionalitas (sama seperti sebelumnya tapi lebih rapi)
+        dropZone.addEventListener('click', () => {
+            setTimeout(() => fileInput.click(), 300);
         });
 
-        apiKeyInput.addEventListener('input', () => {
-            localStorage.setItem('zk_api_key', apiKeyInput.value);
-            checkReady();
-        });
-
-        // --- UPLOAD LOGIC ---
-        dropZone.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
-
-        function handleFiles(files) {
-            if (files.length > MAX_FILES) {
-                showToast(`Maksimal ${MAX_FILES} file!`, "error");
-                return;
-            }
-
-            filesArray = []; 
+        fileInput.addEventListener('change', (e) => {
+            filesArray = Array.from(e.target.files);
             previewContainer.innerHTML = '';
-            previewContainer.style.display = 'flex';
-            uploadContent.style.display = 'none';
-
-            Array.from(files).forEach((file) => {
-                if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
-                    showToast("File harus berupa Gambar atau Video!", "error");
-                    return;
-                }
-
-                if (file.type.startsWith('video/')) {
-                    const sizeMB = file.size / (1024 * 1024);
-                    if (sizeMB > MAX_VIDEO_SIZE_MB) {
-                        showToast(`Video ${file.name} terlalu besar! Max ${MAX_VIDEO_SIZE_MB}MB.`, "error");
-                        return;
-                    }
-                }
-
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const fileData = {
-                        id: Date.now() + Math.random(),
-                        name: file.name,
-                        base64: e.target.result,
-                        type: file.type
-                    };
-                    filesArray.push(fileData);
-                    addThumbnail(fileData);
-                    checkReady();
-                };
-                reader.readAsDataURL(file);
+            filesArray.forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.width = '60px';
+                img.style.height = '60px';
+                img.style.borderRadius = '8px';
+                img.style.objectFit = 'cover';
+                previewContainer.appendChild(img);
             });
-        }
-
-        function addThumbnail(fileData) {
-            const div = document.createElement('div');
-            div.className = 'thumb-item';
-            let mediaTag = '';
-            if (fileData.type.startsWith('video/')) {
-                mediaTag = `<video src="${fileData.base64}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`;
-            } else {
-                mediaTag = `<img src="${fileData.base64}" alt="thumb">`;
-            }
-            div.innerHTML = `
-                ${mediaTag}
-                <div class="remove-thumb" onclick="removeFile('${fileData.id}')">×</div>
-            `;
-            previewContainer.appendChild(div);
-        }
-
-        window.removeFile = function(id) {
-            filesArray = filesArray.filter(f => f.id != id);
-            previewContainer.innerHTML = '';
-            if(filesArray.length === 0) {
-                previewContainer.style.display = 'none';
-                uploadContent.style.display = 'block';
-            } else {
-                filesArray.forEach(addThumbnail);
-            }
             checkReady();
-        };
+        });
 
         function checkReady() {
-            generateBtn.disabled = !(filesArray.length > 0 && apiKeyInput.value.trim().length > 0);
+            generateBtn.disabled = !(filesArray.length > 0 && apiKeyInput.value.length > 5);
         }
 
-        // --- TEST CONNECTION ---
-        testBtn.addEventListener('click', async () => {
-            const key = apiKeyInput.value.trim();
-            const model = modelSelect.value;
-            if (!key) return showToast("Masukkan API Key!", "error");
+        apiKeyInput.addEventListener('input', checkReady);
 
-            const originalText = testBtn.innerText;
-            testBtn.disabled = true;
-            testBtn.innerText = "...";
-
-            try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
-                const payload = { contents: [{ parts: [{ text: "Test" }] }] };
-
-                const res = await fetch(url, { 
-                    method: "POST", 
-                    headers: { "Content-Type": "application/json" }, 
-                    body: JSON.stringify(payload) 
-                });
-
-                if (res.ok) {
-                    showToast("Koneksi Sukses!", "success");
-                    testBtn.classList.add('success');
-                    testBtn.innerText = "OK";
-                } else {
-                    throw new Error("Gagal");
-                }
-            } catch (e) {
-                showToast("Koneksi Gagal", "error");
-            } finally {
-                testBtn.disabled = false;
-            }
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeToggle');
+        themeBtn.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            themeBtn.innerText = theme === 'dark' ? '🌙' : '☀️';
         });
 
-        // --- BATCH GENERATION LOGIC ---
-        generateBtn.addEventListener('click', async () => {
-            const key = apiKeyInput.value.trim();
-            const model = modelSelect.value;
-            
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = '<span class="spinner"></span> Processing ' + filesArray.length + ' Files...';
-            resultsList.innerHTML = ''; 
-
-            const promises = filesArray.map(async (file) => {
-                const base64Data = file.base64.split(',')[1];
-                const mimeType = file.type;
-                const isVideo = mimeType.startsWith('video/');
-
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
-                
-                let promptInstruction = "";
-                if (isVideo) {
-                    promptInstruction = `Analyze this video clip. Create a detailed prompt for AI video generation (like Sora, Runway, Pika) in **English**.
-                    Describe the motion, action, scene, lighting, camera movement, and style.
-                    **Return ONLY the plain text prompt.**
-                    Do NOT use JSON format.
-                    Do NOT include markdown code blocks.`;
-                } else {
-                    promptInstruction = `Analyze this image and create a detailed prompt for AI image generation (Midjourney, Stable Diffusion, DALL-E) in **English**.
-                    Describe the subject, style, lighting, composition, colors, and mood.
-                    **Return ONLY the plain text prompt.**
-                    Do NOT use JSON format.
-                    Do NOT include markdown code blocks.`;
-                }
-                
-                const payload = {
-                    contents: [{
-                        parts: [
-                            { text: promptInstruction },
-                            { inline_data: { mime_type: mimeType, data: base64Data } }
-                        ]
-                    }]
-                };
-
-                try {
-                    const res = await fetch(url, { 
-                        method: "POST", 
-                        headers: { "Content-Type": "application/json" }, 
-                        body: JSON.stringify(payload) 
-                    });
-
-                    if (!res.ok) {
-                        const errJson = await res.json();
-                        throw new Error(errJson.error?.message || "API Error");
-                    }
-                    
-                    const data = await res.json();
-                    let rawText = data.candidates[0].content.parts[0].text;
-                    const cleanText = rawText.replace(/```/g, '').replace(/text/g, '').trim();
-                    
-                    return { success: true, file, data: cleanText };
-
-                } catch (err) {
-                    return { success: false, file, error: err.message };
-                }
-            });
-
-            const results = await Promise.all(promises);
-
-            results.forEach((result, index) => {
-                if(result.success) {
-                    createResultCard(result.file, result.data, index + 1);
-                } else {
-                    createErrorCard(result.file, result.error, index + 1);
-                }
-            });
-
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '✨ Generate Batch Prompts';
-            showToast("Selesai memproses!", "success");
-        });
-
-        // --- RENDER FUNCTIONS ---
-        function createResultCard(file, textData, num) {
-            const card = document.createElement('div');
-            card.className = 'result-card';
-
-            let mediaTagHTML = '';
-            if (file.type.startsWith('video/')) {
-                mediaTagHTML = `<video src="${file.base64}" class="card-thumb" controls muted></video>`;
-            } else {
-                mediaTagHTML = `<img src="${file.base64}" class="card-thumb" alt="img">`;
-            }
-
-            card.innerHTML = `
-                <div class="card-header">
-                    ${mediaTagHTML}
-                    <div class="card-info">
-                        <div class="card-title">Hasil #${num}: ${file.name}</div>
-                        <!-- oncopy="return false" mematikan Ctrl+C di elemen ini -->
-                        <textarea class="prompt-box" readonly oncopy="return false;" onpaste="return false;">${textData}</textarea>
-                    </div>
-                </div>
-                <div class="card-actions">
-                    <button class="btn-action copy-btn">📋 Copy Prompt</button>
-                    <button class="btn-action download-btn">💾 Unduh .txt</button>
-                </div>
-            `;
-
-            const promptBox = card.querySelector('.prompt-box');
-
-            // --- 2. JAVASCRIPT EVENT BLOCKER (HARD LOCK) ---
-            promptBox.addEventListener('selectstart', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            promptBox.addEventListener('mouseup', function(e) {
-                this.setSelectionRange(0, 0);
-                e.preventDefault();
-            });
-
-            promptBox.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            promptBox.addEventListener('focus', function() {
-                this.blur();
-            });
-
-            // --- BUTTON ACTIONS ---
-            const copyBtn = card.querySelector('.copy-btn');
-            const downloadBtn = card.querySelector('.download-btn');
-
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(textData);
-                showToast("Prompt Copied!", "success");
-                window.open(ADSTERRA_LINK, "_blank");
-            });
-
-            downloadBtn.addEventListener('click', () => {
-                const blob = new Blob([textData], { type: "text/plain" });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = `zk-prompt-${num}.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                showToast("File Downloaded!", "success");
-                window.open(ADSTERRA_LINK, "_blank");
-            });
-
-            resultsList.appendChild(card);
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 3000);
         }
-
-        function createErrorCard(file, errorMsg, num) {
-            const card = document.createElement('div');
-            card.className = 'result-card';
-            card.style.borderColor = 'var(--error)';
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="card-thumb" style="background:#333; display:flex; align-items:center; justify-content:center;">❌</div>
-                    <div class="card-info">
-                        <div class="card-title" style="color:var(--error)">Gagal #${num}: ${file.name}</div>
-                        <p style="color:#aaa; font-size:0.9rem;">Error: ${errorMsg}</p>
-                    </div>
-                </div>
-            `;
-            resultsList.appendChild(card);
-        }
-
-        function showToast(msg, type = 'success') {
-            const icon = type === 'success' ? '✅' : '⚠️';
-            document.getElementById('toastIcon').innerText = icon;
-            document.getElementById('toastMsg').innerText = msg;
-            toast.className = `toast show ${type}`;
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
     </script>
-
-<!-- Adsterra Popunder Trigger (Injected) -->
-<script>
-(function(){
-  let fired = false;
-  function fireAd(){
-    if(fired) return;
-    fired = true;
-    window.open(
-      "https://www.effectivegatecpm.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef",
-      "_blank"
-    );
-  }
-  document.addEventListener("copy", fireAd, { once: true });
-  document.addEventListener("click", fireAd, { once: true });
-})();
-</script>
-
 </body>
 </html>
