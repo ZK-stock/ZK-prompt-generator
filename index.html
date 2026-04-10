@@ -63,9 +63,9 @@
             width: 100%; max-width: 800px; margin-bottom: 20px; overflow: hidden; 
             border-radius: 10px; background: rgba(0,0,0,0.2); 
             min-height: 90px; display: flex; align-items: center; justify-content: center;
-            border: 1px dashed #333; /* Garis putus-putus agar terlihat area iklannya */
+            border: 1px dashed #333;
         }
-        .ad-leaderboard span { font-size: 0.7rem; color: #555; } /* Placeholder text if ad not load */
+        .ad-leaderboard span { font-size: 0.7rem; color: #555; }
 
         /* CTA BUTTONS */
         .cta-btn {
@@ -94,12 +94,25 @@
         .container { width: 100%; max-width: 800px; margin-bottom: 30px; }
         .glass-card { background: var(--card-bg); backdrop-filter: blur(15px); padding: 25px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
-        /* BIG ADS STEALTH */
+        /* BIG ADS & TOOLS STEALTH */
         .big-ads-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-bottom: 25px; width: 100%; }
-        .big-ad-card { background: linear-gradient(145deg, #2d3436, #000000); border: 1px solid var(--gold); color: white; padding: 20px; border-radius: 15px; text-align: center; cursor: pointer; text-decoration: none; transition: transform 0.3s; position: relative; overflow: hidden; }
+        .big-ad-card { background: linear-gradient(145deg, #2d3436, #000000); border: 1px solid var(--gold); color: white; padding: 20px; border-radius: 15px; text-align: center; cursor: pointer; text-decoration: none; transition: transform 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .big-ad-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(241, 196, 15, 0.2); }
         .big-ad-card h3 { color: var(--gold); margin-bottom: 5px; font-size: 1.1rem; }
         .big-ad-card span { font-size: 0.8rem; color: #ddd; display: block; }
+        
+        /* TOOL LINKS (NEW) */
+        .tool-link-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--primary);
+            color: white; padding: 20px; border-radius: 15px; text-align: center;
+            cursor: pointer; text-decoration: none; transition: all 0.3s;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .tool-link-card:hover { background: rgba(142, 68, 173, 0.2); transform: scale(1.03); }
+        .tool-link-card h3 { color: var(--primary-light); margin-bottom: 5px; font-size: 1.1rem; }
+        .tool-link-card span { font-size: 0.8rem; color: var(--text-muted); display: block; }
+        .tool-icon { font-size: 2rem; margin-bottom: 10px; }
 
         /* FORM */
         .form-group { margin-bottom: 15px; position: relative; }
@@ -150,7 +163,7 @@
         .ad-display-slot { 
             width: 100%; margin: 20px 0; display: flex; justify-content: center; 
             background: rgba(0,0,0,0.2); border-radius: 10px; padding: 10px;
-            min-height: 250px; /* Ruang cukup untuk iklan gambar besar */
+            min-height: 250px;
         }
 
         /* TESTIMONI UPDATE */
@@ -178,11 +191,28 @@
         .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 12px 25px; border-radius: 50px; z-index: 10000; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 0.9rem; font-weight: bold; border: 1px solid var(--border-color); }
         .spinner { border: 4px solid rgba(255, 255, 255, 0.1); width: 40px; height: 40px; border-radius: 50%; border-left-color: var(--primary); animation: spin 1s linear infinite; display: none; margin: 20px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* MYSTERY BUTTON (NEW) */
+        .mystery-fab {
+            position: fixed; bottom: 90px; right: 20px;
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, #ff0000, #ff8800);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+            cursor: pointer; z-index: 950; animation: pulse 2s infinite;
+            border: 2px solid white;
+        }
+        .mystery-fab:hover { transform: scale(1.1); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); } }
     </style>
 </head>
 <body>
 
     <button class="theme-toggle" id="themeToggle">🌙</button>
+
+    <!-- MYSTERY GIFT BUTTON (NEW FEATURE) -->
+    <div class="mystery-fab" onclick="triggerAd()" title="Klaim Bonus!">🎁</div>
 
     <!-- POPUP DM -->
     <div class="popup-overlay" id="dmPopup">
@@ -226,6 +256,7 @@
 
     <div class="container">
         
+        <!-- BAGIAN 1: IKLAN/CPA -->
         <div class="big-ads-section">
             <a href="https://www.profitablecpmratenetwork.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef" target="_blank" class="big-ad-card" onclick="triggerAd()">
                 <h3>📹 Sukses Jadi YouTuber</h3>
@@ -238,6 +269,21 @@
             <a href="https://www.profitablecpmratenetwork.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef" target="_blank" class="big-ad-card" onclick="triggerAd()">
                 <h3>🎨 Freelance Jual Gambar</h3>
                 <span>Jual hasil AI di Stock Market</span>
+            </a>
+        </div>
+
+        <!-- BAGIAN 2: MICROSTOCK TOOLS (NEW FEATURE) -->
+        <h3 style="text-align:center; margin: 20px 0 15px; color:var(--text-muted); font-size:1rem;">🛠️ ALAT BANTU MICROSTOCK</h3>
+        <div class="big-ads-section">
+            <a href="https://zk-stock.github.io/ZK-metadata/" target="_blank" class="tool-link-card">
+                <div class="tool-icon">🏷️</div>
+                <h3>ZK Metadata</h3>
+                <span>Generator metadata otomatis untuk upload stok foto</span>
+            </a>
+            <a href="https://zk-stock.github.io/calendar-microstock/" target="_blank" class="tool-link-card">
+                <div class="tool-icon">📅</div>
+                <h3>Kalender Microstock</h3>
+                <span>Jadwal tema & tren foto untuk bulan ini</span>
             </a>
         </div>
 
@@ -263,10 +309,10 @@
                 <label>Pilih Model Kecepatan</label>
                 <select id="modelSelect">
                     <option value="gemini-1.5-flash">Flash 1.5 (Cepat)</option>
-                    <option value="gemini-2.5-flash" selected>Flash 2.5 (Super Cepat - Disarankan)</option>
+                    <option value="gemini-2.0-flash-exp" selected>Flash 2.0 (Super Cepat - Disarankan)</option>
                     <option value="gemini-1.5-pro">Pro 1.5 (Kualitas Tinggi)</option>
                 </select>
-                <small class="model-note">⚡ Disarankan pakai model 2.5 Flash.</small>
+                <small class="model-note">⚡ Disarankan pakai model Flash 2.0.</small>
             </div>
         </div>
 
@@ -469,9 +515,7 @@
         let adStatus = { apiInput: false, upload: false, generate: false, copy: {} };
 
         window.addEventListener('load', () => { 
-            // FITUR BARU: LOAD API KEY DARI HISTORY
             loadSavedApiKey();
-            // POPUP
             setTimeout(() => { document.getElementById('dmPopup').style.display = 'flex'; }, 1500); 
         });
         
@@ -483,7 +527,7 @@
             if (input.type === "password") { input.type = "text"; icon.innerText = "🙈"; } else { input.type = "password"; icon.innerText = "👁️"; }
         }
 
-        // FITUR BARU: SIMPAN & LOAD API KEY
+        // SIMPAN & LOAD API KEY
         function saveApiKey(key) {
             localStorage.setItem('zk_api_user', key);
         }
@@ -492,8 +536,6 @@
             const savedKey = localStorage.getItem('zk_api_user');
             if (savedKey) {
                 document.getElementById('apiKey').value = savedKey;
-                // Optional: Auto check jika key tersimpan? Lebih baik biarkan user cek manual
-                // document.getElementById('testBtn').click();
             }
         }
 
@@ -518,7 +560,6 @@
                     if(response.ok) { 
                         statusDiv.className = 'api-status status-success'; 
                         statusDiv.innerText = "✅ API Key Valid & Siap!"; 
-                        // SIMPAN KEY JIKA SUKSES
                         saveApiKey(key);
                     } else { 
                         throw new Error("Invalid Key"); 
@@ -550,7 +591,6 @@
                     showToast("Klik 1x untuk buka akses input..."); 
                 }
             });
-            // Juga simpan saat user mengetik (optional, agar tidak hilang saat refresh)
             apiKeyInput.addEventListener('input', function(e) {
                 localStorage.setItem('zk_api_user', e.target.value);
             });
@@ -607,7 +647,6 @@
             if (!apiKey) { showToast("⚠️ Masukkan API Key!"); return; } 
             if (selectedFiles.length === 0) { showToast("⚠️ Upload gambar dulu!"); return; }
             
-            // SIMPAN KEY SAAT MULAI GENERATE
             saveApiKey(apiKey);
 
             generateBtn.disabled = true; 
@@ -618,28 +657,80 @@
 
             try {
                 for (let i = 0; i < selectedFiles.length; i++) {
-                    const file = selectedFiles[i]; const base64Data = await fileToBase64(file);
-                    const promptText = "Analyze this image. Generate a detailed English prompt for AI image generation. Then translate it to Indonesian. Return ONLY valid JSON format like this: {\"english\": \"...\", \"indonesian\": \"...\"}. Do not add markdown.";
+                    const file = selectedFiles[i]; 
+                    const base64Data = await fileToBase64(file);
+                    
+                    // PERBAIKAN LOGIKA PROMPT UNTUK VIDEO & GAMBAR
+                    let promptText = "";
+                    if (file.type.startsWith('video/')) {
+                        promptText = "Analyze this video clip carefully. Describe the visual style, subject, action, and atmosphere. Generate a highly detailed English prompt suitable for AI video generation. Then translate it to Indonesian. Return ONLY valid JSON format like this: {\"english\": \"...\", \"indonesian\": \"...\"}. Do not add markdown.";
+                    } else {
+                        promptText = "Analyze this image carefully. Generate a highly detailed English prompt for AI image generation (Midjourney/Stable Diffusion style). Then translate it to Indonesian. Return ONLY valid JSON format like this: {\"english\": \"...\", \"indonesian\": \"...\"}. Do not add markdown.";
+                    }
+
                     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+                    
                     const response = await fetch(url, {
-                        method: "POST", headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: promptText }, { inline_data: { mime_type: file.type, data: base64Data.split(',')[1] } }] }] })
+                        method: "POST", 
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ 
+                            contents: [{ 
+                                parts: [
+                                    { text: promptText }, 
+                                    { inline_data: { mime_type: file.type, data: base64Data.split(',')[1] } }
+                                ] 
+                            }] 
+                        })
                     });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+
                     const data = await response.json();
                     let indoText = "Gagal parsing.", engText = "Gagal parsing.";
+
+                    // PERBAIKAN PARSING JSON
                     if (data.candidates && data.candidates.length > 0) {
                         const rawText = data.candidates[0].content.parts[0].text;
-                        const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                        console.log("Raw AI Response:", rawText); // Debugging di console browser
+                        
+                        // Coba ekstrak JSON dengan regex lebih kuat
+                        const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+                        let cleanJson = "";
+                        
+                        if (jsonMatch) {
+                            cleanJson = jsonMatch[0];
+                        } else {
+                            // Fallback jika tidak ada kurung kurawal, coba bersihkan markdown biasa
+                            cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                        }
+
                         try {
                             const resultData = JSON.parse(cleanJson);
-                            indoText = resultData.indonesian; engText = resultData.english;
-                        } catch (e) { console.error(e); engText = rawText; indoText = "Gagal terjemahkan otomatis."; }
+                            indoText = resultData.indonesian || resultData.INDONESIAN || "Terjemahan tidak ditemukan."; 
+                            engText = resultData.english || resultData.ENGLISH || "Prompt tidak ditemukan.";
+                        } catch (e) { 
+                            console.error("JSON Parse Error:", e);
+                            // Jika JSON tetap gagal, tampilkan raw text agar user tahu responnya
+                            engText = rawText; 
+                            indoText = "(Gagal parsing JSON, lihat teks Inggris)";
+                        }
+                    } else if (data.promptFeedback) {
+                        // Handle Safety Filter
+                        throw new Error("Gambar ditolak oleh Safety Filter AI.");
+                    } else {
+                        throw new Error("Respon kosong dari AI.");
                     }
+
                     createResultTable(i + 1, indoText, engText);
                 }
                 resultArea.style.display = 'block';
                 showToast("✅ Selesai!");
-            } catch (error) { console.error(error); showToast("❌ Error: Cek API Key."); }
+            } catch (error) { 
+                console.error(error); 
+                showToast("❌ Error: " + error.message); 
+            }
             finally { 
                 generateBtn.disabled = false; 
                 generateBtn.innerText = "✨ MULAI GENERATE PROMPT"; 
