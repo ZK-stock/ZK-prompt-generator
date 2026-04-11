@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZK Prompt Generator - Video & Image</title>
     <style>
+        /* --- ORIGINAL STYLES --- */
         :root {
             --primary: #6c5ce7;
             --primary-hover: #5649c0;
@@ -17,6 +18,15 @@
             --wa-color: #25D366;
         }
 
+        /* --- NEW LIGHT THEME VARIABLES --- */
+        body.light-theme {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #ddd;
+            --primary: #6c5ce7; 
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
 
         body {
@@ -27,15 +37,41 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
         }
+
+        /* --- THEME TOGGLE BUTTON --- */
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            z-index: 10;
+        }
+        .theme-toggle:hover { transform: scale(1.1); }
 
         /* --- LOGO & HEADER TEXT STYLES --- */
         .logo-container {
@@ -44,18 +80,19 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 10px;
+            margin-top: 10px;
         }
 
         .zk-logo {
-            width: 200px; /* Ukuran Logo */
+            width: 180px; 
             height: auto;
             object-fit: contain;
-            margin-bottom: -10px; /* Rapatkan jarak dengan teks */
-            filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.5)); /* Efek glow */
+            margin-bottom: -5px; 
+            filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.5)); 
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--primary);
             font-weight: 800;
             letter-spacing: 1px;
@@ -72,11 +109,11 @@
             background-color: var(--wa-color);
             color: white;
             text-decoration: none;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.95rem;
-            margin-top: 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
         }
@@ -88,9 +125,65 @@
         }
 
         .whatsapp-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: white;
+        }
+
+        /* --- NEW MENU GRID STYLES --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .menu-icon { font-size: 1.8rem; }
+        .menu-title { font-size: 0.9rem; font-weight: bold; }
+        
+        /* Ads Wrapper */
+        .ad-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 10px 0;
+            text-align: center;
+            overflow: hidden;
+            background: rgba(0,0,0,0.05); 
+            border-radius: 8px;
+            padding: 5px;
+        }
+        
+        .ad-label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .container {
@@ -109,7 +202,7 @@
             border: 1px solid var(--border-color);
         }
 
-        .form-group { margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; position: relative; }
         .form-group:last-child { margin-bottom: 0; }
 
         label {
@@ -122,7 +215,7 @@
 
         .input-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         input, select {
@@ -136,10 +229,16 @@
             outline: none;
             transition: border 0.3s;
         }
+        
+        body.light-theme input, body.light-theme select {
+            background: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+        }
 
         input:focus, select:focus { border-color: var(--primary); }
 
-        .btn-test {
+        .btn-test, .btn-eye {
             background: #2d2d35;
             color: #aaa;
             border: 1px solid var(--border-color);
@@ -148,9 +247,48 @@
             cursor: pointer;
             font-weight: bold;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .btn-test:hover { background: #3d3d45; color: white; }
-        .btn-test.success { color: var(--success); border-color: var(--success); }
+        
+        body.light-theme .btn-test, body.light-theme .btn-eye {
+            background: #f0f0f0;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .btn-test:hover, .btn-eye:hover { background: var(--primary); color: white; }
+        .btn-test.success { color: var(--success); border-color: var(--success); background: rgba(0,184,148,0.1); }
+
+        .api-help-link {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 5px;
+            text-align: right;
+        }
+        .api-help-link:hover { text-decoration: underline; }
+
+        /* --- COLLAPSIBLE GUIDE --- */
+        .guide-box {
+            background: rgba(108, 92, 231, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        .guide-content {
+            display: none;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        .guide-box.active .guide-content { display: block; }
+        .guide-header { font-weight: bold; display: flex; justify-content: space-between; }
 
         /* --- UPLOAD AREA --- */
         .upload-zone {
@@ -166,6 +304,7 @@
         }
 
         .upload-zone:hover { border-color: var(--primary); background: #23232a; }
+        body.light-theme .upload-zone:hover { background: #f9f9f9; }
 
         .upload-icon { font-size: 2.5rem; color: #555; margin-bottom: 10px; }
         .upload-text { color: #888; font-size: 1rem; }
@@ -274,7 +413,6 @@
             margin-bottom: 5px;
         }
 
-        /* TEXTAREA ANTI COPY MANUAL (HARD LOCK) */
         textarea.prompt-box {
             width: 100%;
             height: 150px;
@@ -288,15 +426,19 @@
             font-family: 'Courier New', monospace;
             line-height: 1.5;
             
-            /* 1. CSS LOCK */
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            
             cursor: default;
+        }
+        
+        body.light-theme textarea.prompt-box {
+            background: #f4f4f4;
+            color: #222;
+            border: 1px solid #ccc;
         }
 
         .card-actions {
@@ -316,8 +458,13 @@
             cursor: pointer;
             transition: 0.2s;
         }
+        
+        body.light-theme .btn-action {
+            background: #e0e0e0;
+            color: #333;
+        }
 
-        .btn-action:hover { background: #3d3d45; }
+        .btn-action:hover { background: var(--primary); color: white; }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -348,10 +495,12 @@
         @media (max-width: 600px) {
             .card-header { flex-direction: column; align-items: center; text-align: center; }
             .card-thumb { margin: 0 auto; }
+            .input-row { flex-wrap: wrap; }
+            .btn-test, .btn-eye { flex: 0 0 auto; }
         }
     </style>
 
-<!-- Adsterra Scripts (Injected) -->
+<!-- Adsterra Scripts (Original) -->
 <script>
 (function(){
   try {
@@ -374,15 +523,18 @@
 <body>
 
     <header>
-        <!-- LOGO + TEKS DI BAWAHNYA -->
+        <!-- THEME TOGGLE BUTTON -->
+        <button class="theme-toggle" id="themeToggle" title="Ganti Tema">
+            🌙
+        </button>
+
+        <!-- LOGO + TEKS -->
         <div class="logo-container">
-            <!-- LOGO ZK ANDA -->
             <img src="https://z-cdn-media.chatglm.cn/files/c6291519-8ab0-465d-8f7a-c80a0b04978f.png?auth_key=1870807375-f619d5a796344a9589b79c05247ab733-0-f8780a7acf836353d0979f6197b8e96f" alt="ZK Logo" class="zk-logo">
-            <!-- TEKS PROMPT GENERATOR DI BAWAH LOGO -->
             <h1>Prompt Generator</h1>
         </div>
         
-        <!-- TOMBOL WHATSAPP CHANNEL -->
+        <!-- TOMBOL WHATSAPP -->
         <a href="https://www.whatsapp.com/channel/0029VbBv4Ej9Gv7dJ6LPor1j" target="_blank" class="whatsapp-btn">
             <svg class="whatsapp-icon" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -391,16 +543,72 @@
         </a>
     </header>
 
+    <!-- AD SLOT 1 -->
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <script async="async" data-cfasync="false" src="https://pl29068804.profitablecpmratenetwork.com/fc4d4b8eee0623bec56f1cad63b055fd/invoke.js"></script>
+        <div id="container-fc4d4b8eee0623bec56f1cad63b055fd"></div>
+    </div>
+
+    <!-- MENU GRID (Sudah Dibersihkan) -->
+    <div class="menu-grid">
+        <a href="https://zk-stock.github.io/ZK-metadata/" target="_blank" class="menu-item">
+            <span class="menu-icon">🏷️</span>
+            <span class="menu-title">METADATA</span>
+        </a>
+        <a href="https://zk-stock.github.io/calendar-microstock/" target="_blank" class="menu-item">
+            <span class="menu-icon">📅</span>
+            <span class="menu-title">KALENDER</span>
+        </a>
+        <a href="https://www.tiktok.com/@ironmenine" target="_blank" class="menu-item">
+            <span class="menu-icon">📩</span>
+            <span class="menu-title">DM FAST RESPOND</span>
+        </a>
+        <!-- Menu tanpa link untuk sementara (karena belum ada link tujuan) -->
+        <div class="menu-item" onclick="alert('Halaman ini sedang disiapkan.')">
+            <span class="menu-icon">💰</span>
+            <span class="menu-title">AFFILIATE SUKSES</span>
+        </div>
+        <div class="menu-item" onclick="alert('Halaman ini sedang disiapkan.')">
+            <span class="menu-icon">🎨</span>
+            <span class="menu-title">JUAL GAMBAR AI</span>
+        </div>
+    </div>
+
     <div class="container">
 
-        <!-- 1. Settings -->
+        <!-- 1. Settings Card -->
         <div class="settings-card">
+            
+            <!-- GUIDE BOX -->
+            <div class="guide-box" id="guideBox">
+                <div class="guide-header">
+                    <span>❓ Apa itu API Key dan cara kerjanya?</span>
+                    <span>▼</span>
+                </div>
+                <div class="guide-content">
+                    <p>API Key adalah "kunci" akses agar tool ini bisa terhubung ke otak AI Google Gemini.</p>
+                    <br>
+                    <p><strong>Cara Kerja:</strong><br>
+                    1. Anda upload gambar/video.<br>
+                    2. Tool mengirim file ke Google AI.<br>
+                    3. AI menganalisa dan membuat deskripsi teks (Prompt) dalam bahasa Inggris.<br>
+                    4. Prompt tersebut siap digunakan untuk Midjourney, Stable Diffusion, dll.</p>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="apiKey">API Key Google AI</label>
                 <div class="input-row">
                     <input type="password" id="apiKey" placeholder="AIzaSy..." autocomplete="off">
+                    <button type="button" class="btn-eye" id="togglePassword" title="Lihat/Sembunyikan">
+                        👁️
+                    </button>
                     <button type="button" class="btn-test" id="testBtn">Cek</button>
                 </div>
+                <a href="https://zkcreativestudio.blogspot.com/p/buat-apikey-free-gmini.html" target="_blank" class="api-help-link">
+                    🔗 Panduan cara membuat API Key (Klik disini)
+                </a>
             </div>
             
             <div class="form-group">
@@ -412,6 +620,21 @@
                     <option value="gemini-1.5-pro">Gemini 1.5 Pro (Fallback)</option>
                 </select>
             </div>
+        </div>
+
+        <!-- AD SLOT 2 -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script>
+            atOptions = {
+                'key' : 'b212bdaa07651c62953344db0c8df11c',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+            </script>
+            <script src="https://www.highperformanceformat.com/b212bdaa07651c62953344db0c8df11c/invoke.js"></script>
         </div>
 
         <!-- 2. Upload Area -->
@@ -435,6 +658,12 @@
 
     </div>
 
+    <!-- AD SLOT 3 -->
+    <div class="ad-container" style="margin-top: 30px;">
+        <div class="ad-label">Advertisement</div>
+        <script src="https://pl29068798.profitablecpmratenetwork.com/5c/37/0d/5c370d7da86bc65dd214db492bc00fff.js"></script>
+    </div>
+
     <!-- Toast -->
     <div class="toast" id="toast">
         <span id="toastIcon"></span>
@@ -442,13 +671,44 @@
     </div>
 
     <script>
-        // --- KONFIGURASI ---
+        // --- FITUR BARU: THEME TOGGLE ---
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        if(localStorage.getItem('zk_theme') === 'light') {
+            body.classList.add('light-theme');
+            themeToggle.innerText = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const isLight = body.classList.contains('light-theme');
+            themeToggle.innerText = isLight ? '☀️' : '🌙';
+            localStorage.setItem('zk_theme', isLight ? 'light' : 'dark');
+        });
+
+        // --- FITUR BARU: SHOW/HIDE PASSWORD ---
+        const togglePassword = document.getElementById('togglePassword');
+        const apiKeyInput = document.getElementById('apiKey');
+
+        togglePassword.addEventListener('click', function () {
+            const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            apiKeyInput.setAttribute('type', type);
+            this.innerText = type === 'password' ? '👁️' : '🚫';
+        });
+
+        // --- FITUR BARU: PANDUAN TOGGLE ---
+        const guideBox = document.getElementById('guideBox');
+        guideBox.addEventListener('click', () => {
+            guideBox.classList.toggle('active');
+        });
+
+
+        // --- KODE ASLI ANDA ---
         const ADSTERRA_LINK = "https://www.effectivegatecpm.com/xcdqu4yief?key=8e3a8e86bbaa562b2e205ef5dfefbada";
         const MAX_FILES = 5;
         const MAX_VIDEO_SIZE_MB = 5;
 
-        // --- VARIABLES ---
-        const apiKeyInput = document.getElementById('apiKey');
         const modelSelect = document.getElementById('modelSelect');
         const testBtn = document.getElementById('testBtn');
         const dropZone = document.getElementById('dropZone');
@@ -461,7 +721,6 @@
 
         let filesArray = [];
 
-        // --- INIT ---
         window.addEventListener('DOMContentLoaded', () => {
             const savedKey = localStorage.getItem('zk_api_key');
             if(savedKey) apiKeyInput.value = savedKey;
@@ -579,8 +838,13 @@
                 }
             } catch (e) {
                 showToast("Koneksi Gagal", "error");
+                testBtn.classList.remove('success');
+                testBtn.innerText = originalText;
             } finally {
-                testBtn.disabled = false;
+                if(!testBtn.classList.contains('success')) {
+                    testBtn.disabled = false;
+                    if(testBtn.innerText === "...") testBtn.innerText = originalText;
+                }
             }
         });
 
@@ -679,7 +943,6 @@
                     ${mediaTagHTML}
                     <div class="card-info">
                         <div class="card-title">Hasil #${num}: ${file.name}</div>
-                        <!-- oncopy="return false" mematikan Ctrl+C di elemen ini -->
                         <textarea class="prompt-box" readonly oncopy="return false;" onpaste="return false;">${textData}</textarea>
                     </div>
                 </div>
@@ -691,7 +954,6 @@
 
             const promptBox = card.querySelector('.prompt-box');
 
-            // --- 2. JAVASCRIPT EVENT BLOCKER (HARD LOCK) ---
             promptBox.addEventListener('selectstart', function(e) {
                 e.preventDefault();
                 return false;
@@ -711,7 +973,6 @@
                 this.blur();
             });
 
-            // --- BUTTON ACTIONS ---
             const copyBtn = card.querySelector('.copy-btn');
             const downloadBtn = card.querySelector('.download-btn');
 
@@ -763,7 +1024,7 @@
 
     </script>
 
-<!-- Adsterra Popunder Trigger (Injected) -->
+<!-- Adsterra Popunder Trigger -->
 <script>
 (function(){
   let fired = false;
