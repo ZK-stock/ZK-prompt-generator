@@ -13,6 +13,7 @@
     <style>
         /* ============================================
            ZK PROMPT GENERATOR — PREMIUM UI
+           (SAME AS YOUR ORIGINAL CSS — KEEP IT)
            ============================================ */
 
         /* --- DARK THEME (DEFAULT) --- */
@@ -124,7 +125,7 @@
         }
 
         /* ============================================
-           HEADER
+           HEADER (SAME AS ORIGINAL)
            ============================================ */
         header {
             text-align: center;
@@ -148,7 +149,6 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* --- THEME TOGGLE --- */
         .theme-toggle {
             position: absolute;
             top: 18px;
@@ -175,7 +175,6 @@
             border-color: var(--primary);
         }
 
-        /* --- LOGO --- */
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -218,7 +217,6 @@
             letter-spacing: 0.4px;
         }
 
-        /* --- WHATSAPP BUTTON --- */
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
@@ -250,7 +248,7 @@
         }
 
         /* ============================================
-           MENU GRID
+           MENU GRID (SAME AS ORIGINAL)
            ============================================ */
         .menu-grid {
             display: grid;
@@ -325,11 +323,12 @@
         }
 
         /* ============================================
-           AD CONTAINER
+           AD CONTAINER — DIPERBAIKI (Hanya 1 Unit)
            ============================================ */
         .ad-container {
             width: 100%;
-            margin: 0;
+            max-width: 728px;
+            margin: 0 auto;
             text-align: center;
             overflow: hidden;
             background: rgba(124, 58, 237, 0.02);
@@ -337,6 +336,7 @@
             border-radius: var(--radius-md);
             padding: 10px;
             transition: background 0.3s;
+            position: relative;
         }
 
         .ad-label {
@@ -348,8 +348,57 @@
             font-weight: 600;
         }
 
+        /* --- Iklan Floating (Tidak Mengganggu) --- */
+        .ad-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            max-width: 300px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: 10px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(calc(100% + 30px));
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ad-float.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ad-float .close-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--error);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .ad-float .close-btn:hover {
+            transform: scale(1.15);
+            background: #DC2626;
+        }
+
         /* ============================================
-           SETTINGS CARD (API)
+           SETTINGS CARD (API) — SAME
            ============================================ */
         .settings-card {
             background: var(--glass-bg);
@@ -362,7 +411,6 @@
             animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
         }
 
-        /* --- Settings Header (visual only, not used by JS) --- */
         .settings-card-header {
             display: flex;
             align-items: center;
@@ -459,7 +507,6 @@
             border-color: var(--primary);
         }
 
-        /* --- Test & Eye Buttons --- */
         .btn-test, .btn-eye {
             background: var(--card-bg);
             color: var(--text-muted);
@@ -515,7 +562,6 @@
             text-decoration: underline;
         }
 
-        /* --- COLLAPSIBLE GUIDE --- */
         .guide-box {
             background: var(--primary-light);
             border: 1px solid rgba(124, 58, 237, 0.18);
@@ -564,7 +610,7 @@
         }
 
         /* ============================================
-           UPLOAD ZONE (HERO)
+           UPLOAD ZONE (SAME)
            ============================================ */
         .upload-zone {
             border: 2px dashed var(--border-color);
@@ -579,7 +625,6 @@
             animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
         }
 
-        /* Animated gradient border on hover */
         .upload-zone::before {
             content: '';
             position: absolute;
@@ -696,7 +741,7 @@
         }
 
         /* ============================================
-           GENERATE BUTTON
+           GENERATE BUTTON (SAME)
            ============================================ */
         .btn-generate {
             width: 100%;
@@ -717,7 +762,6 @@
             animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
         }
 
-        /* Ripple effect layer */
         .btn-generate::before {
             content: '';
             position: absolute;
@@ -756,7 +800,7 @@
         .btn-generate:disabled::before { display: none; }
 
         /* ============================================
-           RESULTS LIST
+           RESULTS LIST (SAME)
            ============================================ */
         .results-list {
             display: flex;
@@ -818,7 +862,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* --- PROMPT TEXTAREA --- */
         textarea.prompt-box {
             width: 100%;
             height: 170px;
@@ -833,7 +876,6 @@
             resize: vertical;
             outline: none;
             transition: border-color 0.3s, box-shadow 0.3s;
-
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -849,7 +891,6 @@
             border-color: #CBD5E1;
         }
 
-        /* --- ACTION BUTTONS --- */
         .card-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -900,7 +941,7 @@
         body.light-theme .btn-action { color: white; }
 
         /* ============================================
-           TOAST
+           TOAST (SAME)
            ============================================ */
         .toast {
             position: fixed;
@@ -1116,25 +1157,6 @@
         }
     </style>
 
-<!-- Adsterra Scripts (Original) -->
-<script>
-(function(){
-  try {
-    var s1 = document.createElement('script');
-    s1.src = "https://pl28737230.effectivegatecpm.com/e9/cf/f3/e9cff37aea52e2a72b500e67263f68f4.js";
-    s1.async = true;
-    document.head.appendChild(s1);
-
-    var s2 = document.createElement('script');
-    s2.src = "https://pl28434722.effectivegatecpm.com/63/63/4a/63634a8d6f875d2f105652f4ca71e9e1.js";
-    s2.async = true;
-    document.head.appendChild(s2);
-  } catch(e) {
-    console.log("Adsterra head error", e);
-  }
-})();
-</script>
-
 </head>
 <body>
 
@@ -1263,10 +1285,10 @@
         </button>
 
         <!-- ==========================================
-             ADVERTISEMENT 1
+             ADVERTISEMENT — HANYA 1 UNIT (DIPERBAIKI)
              ========================================== -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
+        <div class="ad-container" id="mainAd">
+            <div class="ad-label">Sponsored</div>
             <script async="async" data-cfasync="false" src="https://pl29068804.profitablecpmratenetwork.com/fc4d4b8eee0623bec56f1cad63b055fd/invoke.js"></script>
             <div id="container-fc4d4b8eee0623bec56f1cad63b055fd"></div>
         </div>
@@ -1277,11 +1299,21 @@
         <div id="resultsList" class="results-list"></div>
 
         <!-- ==========================================
-             ADVERTISEMENT 2
+             FOOTER
              ========================================== -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <script>
+        <footer class="site-footer">
+            Powered by <a href="https://zk-stock.github.io/" target="_blank">ZK Creative Studio</a> &middot; Google Gemini AI
+        </footer>
+
+    </div>
+
+    <!-- ==========================================
+         IKLAN FLOATING (MUNCUL SETELAH 10 DETIK)
+         ========================================== -->
+    <div class="ad-float" id="floatAd">
+        <button class="close-btn" onclick="document.getElementById('floatAd').classList.remove('show')">✕</button>
+        <div style="font-size:0.6rem; color:var(--text-dim); text-align:center; margin-bottom:4px;">- Sponsor -</div>
+        <script>
             atOptions = {
                 'key' : 'b212bdaa07651c62953344db0c8df11c',
                 'format' : 'iframe',
@@ -1289,25 +1321,8 @@
                 'width' : 728,
                 'params' : {}
             };
-            </script>
-            <script src="https://www.highperformanceformat.com/b212bdaa07651c62953344db0c8df11c/invoke.js"></script>
-        </div>
-
-        <!-- ==========================================
-             ADVERTISEMENT 3
-             ========================================== -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <script src="https://pl29068798.profitablecpmratenetwork.com/5c/37/0d/5c370d7da86bc65dd214db492bc00fff.js"></script>
-        </div>
-
-        <!-- ==========================================
-             FOOTER
-             ========================================== -->
-        <footer class="site-footer">
-            Powered by <a href="https://zk-stock.github.io/" target="_blank">ZK Creative Studio</a> &middot; Google Gemini AI
-        </footer>
-
+        </script>
+        <script src="https://www.highperformanceformat.com/b212bdaa07651c62953344db0c8df11c/invoke.js"></script>
     </div>
 
     <!-- Toast -->
@@ -1349,9 +1364,12 @@
             guideBox.classList.toggle('active');
         });
 
+        // --- IKLAN FLOATING MUNCUL SETELAH 10 DETIK ---
+        setTimeout(() => {
+            document.getElementById('floatAd').classList.add('show');
+        }, 10000);
 
-        // --- KODE ASLI ANDA ---
-        const ADSTERRA_LINK = "https://www.effectivegatecpm.com/xcdqu4yief?key=8e3a8e86bbaa562b2e205ef5dfefbada";
+        // --- KODE ASLI ANDA (TANPA POPUNDER) ---
         const MAX_FILES = 5;
         const MAX_VIDEO_SIZE_MB = 5;
 
@@ -1625,7 +1643,6 @@
             copyBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(textData);
                 showToast("Prompt Copied!", "success");
-                window.open(ADSTERRA_LINK, "_blank");
             });
 
             downloadBtn.addEventListener('click', () => {
@@ -1638,7 +1655,6 @@
                 a.click();
                 document.body.removeChild(a);
                 showToast("File Downloaded!", "success");
-                window.open(ADSTERRA_LINK, "_blank");
             });
 
             resultsList.appendChild(card);
@@ -1669,23 +1685,6 @@
         }
 
     </script>
-
-<!-- Adsterra Popunder Trigger -->
-<script>
-(function(){
-  let fired = false;
-  function fireAd(){
-    if(fired) return;
-    fired = true;
-    window.open(
-      "https://www.effectivegatecpm.com/ukxua19f69?key=04cd91b4e6df592f70c4c4f22764a8ef",
-      "_blank"
-    );
-  }
-  document.addEventListener("copy", fireAd, { once: true });
-  document.addEventListener("click", fireAd, { once: true });
-})();
-</script>
 
 </body>
 </html>
