@@ -13,10 +13,8 @@
     <style>
         /* ============================================
            ZK PROMPT GENERATOR — PREMIUM UI
-           (SAME AS YOUR ORIGINAL CSS — KEEP IT)
            ============================================ */
 
-        /* --- DARK THEME (DEFAULT) --- */
         :root {
             --bg-color: #111827;
             --bg-deep: #0B1120;
@@ -47,7 +45,6 @@
             --radius-xl: 22px;
         }
 
-        /* --- LIGHT THEME --- */
         body.light-theme {
             --bg-color: #F1F5F9;
             --bg-deep: #E2E8F0;
@@ -68,8 +65,11 @@
             --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.1);
         }
 
-        /* --- RESET --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -84,7 +84,6 @@
             overflow-x: hidden;
         }
 
-        /* --- AMBIENT GLOW BACKGROUND --- */
         body::before {
             content: '';
             position: fixed;
@@ -108,11 +107,14 @@
         }
 
         @keyframes ambientDrift {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-3%, -2%) scale(1.02); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-3%, -2%) scale(1.02);
+            }
         }
 
-        /* --- MAIN WRAPPER --- */
         .main-wrapper {
             width: 100%;
             max-width: 880px;
@@ -124,9 +126,6 @@
             z-index: 1;
         }
 
-        /* ============================================
-           HEADER (SAME AS ORIGINAL)
-           ============================================ */
         header {
             text-align: center;
             display: flex;
@@ -145,8 +144,14 @@
         }
 
         @keyframes headerIn {
-            from { opacity: 0; transform: translateY(-20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .theme-toggle {
@@ -247,9 +252,6 @@
             fill: white;
         }
 
-        /* ============================================
-           MENU GRID (SAME AS ORIGINAL)
-           ============================================ */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
@@ -259,8 +261,14 @@
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .menu-item {
@@ -323,11 +331,13 @@
         }
 
         /* ============================================
-           AD CONTAINER — DIPERBAIKI (Hanya 1 Unit)
+           IKLAN UTAMA — UNIT BARU
            ============================================ */
+
         .ad-container {
             width: 100%;
             max-width: 728px;
+            min-height: 100px;
             margin: 0 auto;
             text-align: center;
             overflow: hidden;
@@ -348,13 +358,18 @@
             font-weight: 600;
         }
 
-        /* --- Iklan Floating (Tidak Mengganggu) --- */
+        /* ============================================
+           IKLAN FLOATING — UNIT 728x90
+           ============================================ */
+
         .ad-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 999;
-            max-width: 300px;
+            width: min(728px, calc(100vw - 40px));
+            max-width: 728px;
+            min-height: 110px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
@@ -364,6 +379,7 @@
             transform: translateY(calc(100% + 30px));
             opacity: 0;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .ad-float.show {
@@ -390,6 +406,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            z-index: 20;
         }
 
         .ad-float .close-btn:hover {
@@ -397,9 +414,6 @@
             background: #DC2626;
         }
 
-        /* ============================================
-           SETTINGS CARD (API) — SAME
-           ============================================ */
         .settings-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
@@ -451,7 +465,9 @@
             position: relative;
         }
 
-        .form-group:last-child { margin-bottom: 0; }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
 
         label {
             display: block;
@@ -467,7 +483,8 @@
             gap: 8px;
         }
 
-        input, select {
+        input,
+        select {
             flex: 1;
             background: var(--bg-deep);
             border: 1px solid var(--border-color);
@@ -487,7 +504,8 @@
             border-color: #CBD5E1;
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px var(--primary-light), var(--shadow-sm);
         }
@@ -507,7 +525,8 @@
             border-color: var(--primary);
         }
 
-        .btn-test, .btn-eye {
+        .btn-test,
+        .btn-eye {
             background: var(--card-bg);
             color: var(--text-muted);
             border: 1px solid var(--border-color);
@@ -531,7 +550,8 @@
             border-color: #CBD5E1;
         }
 
-        .btn-test:hover, .btn-eye:hover {
+        .btn-test:hover,
+        .btn-eye:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
@@ -589,7 +609,9 @@
             border-top: 1px solid rgba(124, 58, 237, 0.12);
         }
 
-        .guide-box.active .guide-content { display: block; }
+        .guide-box.active .guide-content {
+            display: block;
+        }
 
         .guide-header {
             font-weight: 600;
@@ -609,9 +631,6 @@
             transform: rotate(180deg);
         }
 
-        /* ============================================
-           UPLOAD ZONE (SAME)
-           ============================================ */
         .upload-zone {
             border: 2px dashed var(--border-color);
             background: var(--card-bg);
@@ -649,8 +668,12 @@
         }
 
         @keyframes borderGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .upload-zone:hover {
@@ -659,10 +682,17 @@
             box-shadow: var(--shadow-glow);
         }
 
-        .upload-zone:hover::before { opacity: 1; }
-        .upload-zone:hover::after { background: var(--card-bg-hover); }
+        .upload-zone:hover::before {
+            opacity: 1;
+        }
 
-        body.light-theme .upload-zone:hover::after { background: #F8FAFC; }
+        .upload-zone:hover::after {
+            background: var(--card-bg-hover);
+        }
+
+        body.light-theme .upload-zone:hover::after {
+            background: #F8FAFC;
+        }
 
         .upload-icon {
             font-size: 3.2rem;
@@ -708,7 +738,8 @@
             box-shadow: 0 0 24px rgba(124, 58, 237, 0.35);
         }
 
-        .thumb-item img, .thumb-item video {
+        .thumb-item img,
+        .thumb-item video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -740,9 +771,6 @@
             height: 28px;
         }
 
-        /* ============================================
-           GENERATE BUTTON (SAME)
-           ============================================ */
         .btn-generate {
             width: 100%;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -797,11 +825,10 @@
             box-shadow: none;
         }
 
-        .btn-generate:disabled::before { display: none; }
+        .btn-generate:disabled::before {
+            display: none;
+        }
 
-        /* ============================================
-           RESULTS LIST (SAME)
-           ============================================ */
         .results-list {
             display: flex;
             flex-direction: column;
@@ -823,8 +850,14 @@
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(28px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card-header {
@@ -938,11 +971,10 @@
             box-shadow: 0 6px 28px rgba(16, 185, 129, 0.45);
         }
 
-        body.light-theme .btn-action { color: white; }
+        body.light-theme .btn-action {
+            color: white;
+        }
 
-        /* ============================================
-           TOAST (SAME)
-           ============================================ */
         .toast {
             position: fixed;
             bottom: 36px;
@@ -974,12 +1006,14 @@
             pointer-events: auto;
         }
 
-        .toast.success { border-color: rgba(16, 185, 129, 0.4); }
-        .toast.error { border-color: rgba(239, 68, 68, 0.4); }
+        .toast.success {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
 
-        /* ============================================
-           SPINNER
-           ============================================ */
+        .toast.error {
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
         .spinner {
             display: inline-block;
             width: 20px;
@@ -992,11 +1026,12 @@
             vertical-align: middle;
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-        /* ============================================
-           FOOTER
-           ============================================ */
         .site-footer {
             width: 100%;
             text-align: center;
@@ -1021,9 +1056,6 @@
             text-decoration: underline;
         }
 
-        /* ============================================
-           RESPONSIVE — TABLET
-           ============================================ */
         @media (max-width: 768px) {
             .main-wrapper {
                 padding: 24px 18px 40px;
@@ -1035,18 +1067,34 @@
                 border-radius: var(--radius-lg);
             }
 
-            .zk-logo { width: 170px; }
-            h1 { font-size: 1.4rem; }
-            .header-subtitle { font-size: 0.82rem; }
+            .zk-logo {
+                width: 170px;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .header-subtitle {
+                font-size: 0.82rem;
+            }
 
             .menu-grid {
                 grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
                 gap: 10px;
             }
 
-            .settings-card { padding: 22px; }
-            .upload-zone { padding: 40px 24px; }
-            .upload-icon { font-size: 2.6rem; }
+            .settings-card {
+                padding: 22px;
+            }
+
+            .upload-zone {
+                padding: 40px 24px;
+            }
+
+            .upload-icon {
+                font-size: 2.6rem;
+            }
 
             .card-header {
                 flex-direction: column;
@@ -1054,15 +1102,20 @@
                 text-align: center;
             }
 
-            .card-thumb { margin: 0 auto; }
+            .card-thumb {
+                margin: 0 auto;
+            }
 
-            .input-row { flex-wrap: wrap; }
-            .btn-test, .btn-eye { flex: 0 0 auto; }
+            .input-row {
+                flex-wrap: wrap;
+            }
+
+            .btn-test,
+            .btn-eye {
+                flex: 0 0 auto;
+            }
         }
 
-        /* ============================================
-           RESPONSIVE — MOBILE
-           ============================================ */
         @media (max-width: 520px) {
             .main-wrapper {
                 padding: 18px 14px 36px;
@@ -1074,9 +1127,17 @@
                 border-radius: var(--radius-md);
             }
 
-            .zk-logo { width: 150px; }
-            h1 { font-size: 1.2rem; }
-            .header-subtitle { font-size: 0.78rem; }
+            .zk-logo {
+                width: 150px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            .header-subtitle {
+                font-size: 0.78rem;
+            }
 
             .menu-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1088,8 +1149,14 @@
                 border-radius: var(--radius-sm);
             }
 
-            .menu-icon { font-size: 1.7rem; }
-            .menu-title { font-size: 0.7rem; letter-spacing: 0.4px; }
+            .menu-icon {
+                font-size: 1.7rem;
+            }
+
+            .menu-title {
+                font-size: 0.7rem;
+                letter-spacing: 0.4px;
+            }
 
             .settings-card {
                 padding: 18px;
@@ -1102,16 +1169,28 @@
                 padding-bottom: 14px;
             }
 
-            .settings-card-icon { width: 38px; height: 38px; font-size: 1.1rem; }
-            .settings-card-text h3 { font-size: 0.92rem; }
+            .settings-card-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1rem;
+            }
+
+            .settings-card-text h3 {
+                font-size: 0.92rem;
+            }
 
             .upload-zone {
                 padding: 32px 18px;
                 border-radius: var(--radius-md);
             }
 
-            .upload-icon { font-size: 2.2rem; }
-            .upload-text { font-size: 0.95rem; }
+            .upload-icon {
+                font-size: 2.2rem;
+            }
+
+            .upload-text {
+                font-size: 0.95rem;
+            }
 
             .btn-generate {
                 padding: 16px;
@@ -1140,7 +1219,9 @@
                 gap: 8px;
             }
 
-            .btn-action { padding: 12px; }
+            .btn-action {
+                padding: 12px;
+            }
 
             .theme-toggle {
                 width: 40px;
@@ -1152,6 +1233,16 @@
 
             .ad-container {
                 border-radius: var(--radius-sm);
+                padding: 8px;
+            }
+
+            /* FLOATING AD RESPONSIVE */
+            .ad-float {
+                width: calc(100vw - 20px);
+                max-width: calc(100vw - 20px);
+                right: 10px;
+                bottom: 10px;
+                min-height: 100px;
                 padding: 8px;
             }
         }
@@ -1171,15 +1262,25 @@
             </button>
 
             <div class="logo-container">
-                <img src="https://z-cdn-media.chatglm.cn/files/c6291519-8ab0-465d-8f7a-c80a0b04978f.png?auth_key=1870807375-f619d5a796344a9589b79c05247ab733-0-f8780a7acf836353d0979f6197b8e96f" alt="ZK Logo" class="zk-logo">
+                <img src="https://z-cdn-media.chatglm.cn/files/c6291519-8ab0-465d-8f7a-c80a0b04978f.png?auth_key=1870807375-f619d5a796344a9589b79c05247ab733-0-f8780a7acf836353d0979f6197b8e96f"
+                     alt="ZK Logo"
+                     class="zk-logo">
+
                 <h1>Prompt Generator</h1>
-                <p class="header-subtitle">Professional AI Prompt Generator for Image & Video</p>
+
+                <p class="header-subtitle">
+                    Professional AI Prompt Generator for Image & Video
+                </p>
             </div>
 
-            <a href="https://www.whatsapp.com/channel/0029VbBv4Ej9Gv7dJ6LPor1j" target="_blank" class="whatsapp-btn">
+            <a href="https://www.whatsapp.com/channel/0029VbBv4Ej9Gv7dJ6LPor1j"
+               target="_blank"
+               class="whatsapp-btn">
+
                 <svg class="whatsapp-icon" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.248-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                 </svg>
+
                 Gabung Channel WhatsApp
             </a>
         </header>
@@ -1188,26 +1289,40 @@
              MENU GRID
              ========================================== -->
         <div class="menu-grid">
-            <a href="https://zk-stock.github.io/ZK-metadata/" target="_blank" class="menu-item">
+
+            <a href="https://zk-stock.github.io/ZK-metadata/"
+               target="_blank"
+               class="menu-item">
                 <span class="menu-icon">🏷️</span>
                 <span class="menu-title">METADATA</span>
             </a>
-            <a href="https://zk-stock.github.io/calendar-microstock/" target="_blank" class="menu-item">
+
+            <a href="https://zk-stock.github.io/calendar-microstock/"
+               target="_blank"
+               class="menu-item">
                 <span class="menu-icon">📅</span>
                 <span class="menu-title">KALENDER</span>
             </a>
-            <a href="https://www.tiktok.com/@ironmenine" target="_blank" class="menu-item">
+
+            <a href="https://www.tiktok.com/@ironmenine"
+               target="_blank"
+               class="menu-item">
                 <span class="menu-icon">📩</span>
                 <span class="menu-title">DM FAST RESPOND</span>
             </a>
-            <div class="menu-item" onclick="alert('Halaman ini sedang disiapkan.')">
+
+            <div class="menu-item"
+                 onclick="alert('Halaman ini sedang disiapkan.')">
                 <span class="menu-icon">💰</span>
                 <span class="menu-title">AFFILIATE SUKSES</span>
             </div>
-            <div class="menu-item" onclick="alert('Halaman ini sedang disiapkan.')">
+
+            <div class="menu-item"
+                 onclick="alert('Halaman ini sedang disiapkan.')">
                 <span class="menu-icon">🎨</span>
                 <span class="menu-title">JUAL GAMBAR AI</span>
             </div>
+
         </div>
 
         <!-- ==========================================
@@ -1217,6 +1332,7 @@
 
             <div class="settings-card-header">
                 <div class="settings-card-icon">🔑</div>
+
                 <div class="settings-card-text">
                     <h3>API Configuration</h3>
                     <p>Hubungkan ke Google Gemini AI</p>
@@ -1224,464 +1340,1290 @@
             </div>
 
             <div class="guide-box" id="guideBox">
+
                 <div class="guide-header">
                     <span>❓ Apa itu API Key dan cara kerjanya?</span>
                     <span>▼</span>
                 </div>
+
                 <div class="guide-content">
-                    <p>API Key adalah "kunci" akses agar tool ini bisa terhubung ke otak AI Google Gemini.</p>
+
+                    <p>
+                        API Key adalah "kunci" akses agar tool ini bisa terhubung
+                        ke otak AI Google Gemini.
+                    </p>
+
                     <br>
-                    <p><strong>Cara Kerja:</strong><br>
-                    1. Anda upload gambar/video.<br>
-                    2. Tool mengirim file ke Google AI.<br>
-                    3. AI menganalisa dan membuat deskripsi teks (Prompt) dalam bahasa Inggris.<br>
-                    4. Prompt tersebut siap digunakan untuk Midjourney, Stable Diffusion, dll.</p>
+
+                    <p>
+                        <strong>Cara Kerja:</strong><br>
+                        1. Anda upload gambar/video.<br>
+                        2. Tool mengirim file ke Google AI.<br>
+                        3. AI menganalisa dan membuat deskripsi teks (Prompt)
+                        dalam bahasa Inggris.<br>
+                        4. Prompt tersebut siap digunakan untuk Midjourney,
+                        Stable Diffusion, dll.
+                    </p>
+
                 </div>
+
             </div>
 
             <div class="form-group">
-                <label for="apiKey">API Key Google AI</label>
+
+                <label for="apiKey">
+                    API Key Google AI
+                </label>
+
                 <div class="input-row">
-                    <input type="password" id="apiKey" placeholder="AIzaSy..." autocomplete="off">
-                    <button type="button" class="btn-eye" id="togglePassword" title="Lihat/Sembunyikan">
+
+                    <input type="password"
+                           id="apiKey"
+                           placeholder="AIzaSy..."
+                           autocomplete="off">
+
+                    <button type="button"
+                            class="btn-eye"
+                            id="togglePassword"
+                            title="Lihat/Sembunyikan">
                         👁️
                     </button>
-                    <button type="button" class="btn-test" id="testBtn">Cek</button>
+
+                    <button type="button"
+                            class="btn-test"
+                            id="testBtn">
+                        Cek
+                    </button>
+
                 </div>
-                <a href="https://zkcreativestudio.blogspot.com/p/buat-apikey-free-gmini.html" target="_blank" class="api-help-link">
+
+                <a href="https://zkcreativestudio.blogspot.com/p/buat-apikey-free-gmini.html"
+                   target="_blank"
+                   class="api-help-link">
                     🔗 Panduan cara membuat API Key (Klik disini)
                 </a>
+
             </div>
 
             <div class="form-group">
-                <label for="modelSelect">Pilihan Model AI (v1beta)</label>
+
+                <label for="modelSelect">
+                    Pilihan Model AI (v1beta)
+                </label>
+
                 <select id="modelSelect">
-                    <option value="gemini-2.5-flash" selected>Gemini 2.5 Flash (Support Video)</option>
-                    <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite</option>
-                    <option value="gemini-2.5-pro">Gemini 2.5 Pro (High Quality)</option>
-                    <option value="gemini-1.5-pro">Gemini 1.5 Pro (Fallback)</option>
+                    <option value="gemini-2.5-flash" selected>
+                        Gemini 2.5 Flash (Support Video)
+                    </option>
+
+                    <option value="gemini-2.5-flash-lite">
+                        Gemini 2.5 Flash Lite
+                    </option>
+
+                    <option value="gemini-2.5-pro">
+                        Gemini 2.5 Pro (High Quality)
+                    </option>
+
+                    <option value="gemini-1.5-pro">
+                        Gemini 1.5 Pro (Fallback)
+                    </option>
                 </select>
+
             </div>
+
         </div>
 
         <!-- ==========================================
-             UPLOAD ZONE (HERO)
+             UPLOAD ZONE
              ========================================== -->
         <div class="upload-zone" id="dropZone">
-            <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display: none;">
+
+            <input type="file"
+                   id="fileInput"
+                   accept="image/*,video/*"
+                   multiple
+                   style="display: none;">
+
             <div id="uploadContent">
-                <div class="upload-icon">📷 🎥</div>
-                <div class="upload-text">Klik untuk pilih hingga 5 File</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 10px;">Supports Image & Video (Max 5MB per file)</div>
+
+                <div class="upload-icon">
+                    📷 🎥
+                </div>
+
+                <div class="upload-text">
+                    Klik untuk pilih hingga 5 File
+                </div>
+
+                <div style="font-size:0.8rem; color:var(--text-dim); margin-top:10px;">
+                    Supports Image & Video (Max 5MB per file)
+                </div>
+
             </div>
+
             <div id="previewContainer"></div>
+
         </div>
 
         <!-- ==========================================
              GENERATE BUTTON
              ========================================== -->
-        <button class="btn-generate" id="generateBtn" disabled>
+        <button class="btn-generate"
+                id="generateBtn"
+                disabled>
             ✨ Generate Batch Prompts
         </button>
 
         <!-- ==========================================
-             ADVERTISEMENT — HANYA 1 UNIT (DIPERBAIKI)
+             IKLAN UTAMA — KODE BARU
              ========================================== -->
         <div class="ad-container" id="mainAd">
-            <div class="ad-label">Sponsored</div>
-            <script async="async" data-cfasync="false" src="https://pl29068804.profitablecpmratenetwork.com/fc4d4b8eee0623bec56f1cad63b055fd/invoke.js"></script>
-            <div id="container-fc4d4b8eee0623bec56f1cad63b055fd"></div>
+
+            <div class="ad-label">
+                Sponsored
+            </div>
+
+            <!-- PROFITABLE RATE CPM - UNIT BARU -->
+            <script async="async"
+                    data-cfasync="false"
+                    src="https://pl28802753.profitableratecpmnetwork.com/6def9d7ddb10b55e224d652e45458248/invoke.js"></script>
+
+            <div id="container-6def9d7ddb10b55e224d652e45458248"></div>
+
         </div>
 
         <!-- ==========================================
              RESULTS LIST
              ========================================== -->
-        <div id="resultsList" class="results-list"></div>
+        <div id="resultsList"
+             class="results-list">
+        </div>
 
         <!-- ==========================================
              FOOTER
              ========================================== -->
         <footer class="site-footer">
-            Powered by <a href="https://zk-stock.github.io/" target="_blank">ZK Creative Studio</a> &middot; Google Gemini AI
+
+            Powered by
+            <a href="https://zk-stock.github.io/"
+               target="_blank">
+                ZK Creative Studio
+            </a>
+
+            &middot;
+
+            Google Gemini AI
+
         </footer>
 
     </div>
 
     <!-- ==========================================
-         IKLAN FLOATING (MUNCUL SETELAH 10 DETIK)
+         IKLAN FLOATING — KODE BARU 728x90
+         MUNCUL SETELAH 10 DETIK
          ========================================== -->
     <div class="ad-float" id="floatAd">
-        <button class="close-btn" onclick="document.getElementById('floatAd').classList.remove('show')">✕</button>
-        <div style="font-size:0.6rem; color:var(--text-dim); text-align:center; margin-bottom:4px;">- Sponsor -</div>
+
+        <button class="close-btn"
+                onclick="document.getElementById('floatAd').classList.remove('show')">
+            ✕
+        </button>
+
+        <div style="font-size:0.6rem; color:var(--text-dim); text-align:center; margin-bottom:4px;">
+            - Sponsor -
+        </div>
+
+        <!-- HIGH REVENUE FORMAT -->
         <script>
             atOptions = {
-                'key' : 'b212bdaa07651c62953344db0c8df11c',
+                'key' : 'a8bee6da698ddcf0cc7d733d3d27cbdd',
                 'format' : 'iframe',
                 'height' : 90,
                 'width' : 728,
                 'params' : {}
             };
         </script>
-        <script src="https://www.highperformanceformat.com/b212bdaa07651c62953344db0c8df11c/invoke.js"></script>
+
+        <script src="https://www.highrevenueformat.com/a8bee6da698ddcf0cc7d733d3d27cbdd/invoke.js"></script>
+
     </div>
 
-    <!-- Toast -->
+    <!-- ==========================================
+         IKLAN SCRIPT BARU KE-3
+         ========================================== -->
+    <script src="https://pl28737230.profitableratecpmnetwork.com/e9/cf/f3/e9cff37aea52e2a72b500e67263f68f4.js"></script>
+
+    <!-- ==========================================
+         TOAST
+         ========================================== -->
     <div class="toast" id="toast">
+
         <span id="toastIcon"></span>
-        <span id="toastMsg">Pesan</span>
+
+        <span id="toastMsg">
+            Pesan
+        </span>
+
     </div>
 
     <script>
-        // --- FITUR BARU: THEME TOGGLE ---
+
+        // ==========================================
+        // THEME TOGGLE
+        // ==========================================
+
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        if(localStorage.getItem('zk_theme') === 'light') {
+        if (localStorage.getItem('zk_theme') === 'light') {
+
             body.classList.add('light-theme');
             themeToggle.innerText = '☀️';
+
         }
 
         themeToggle.addEventListener('click', () => {
+
             body.classList.toggle('light-theme');
-            const isLight = body.classList.contains('light-theme');
-            themeToggle.innerText = isLight ? '☀️' : '🌙';
-            localStorage.setItem('zk_theme', isLight ? 'light' : 'dark');
+
+            const isLight =
+                body.classList.contains('light-theme');
+
+            themeToggle.innerText =
+                isLight ? '☀️' : '🌙';
+
+            localStorage.setItem(
+                'zk_theme',
+                isLight ? 'light' : 'dark'
+            );
+
         });
 
-        // --- FITUR BARU: SHOW/HIDE PASSWORD ---
-        const togglePassword = document.getElementById('togglePassword');
-        const apiKeyInput = document.getElementById('apiKey');
+
+        // ==========================================
+        // SHOW / HIDE PASSWORD
+        // ==========================================
+
+        const togglePassword =
+            document.getElementById('togglePassword');
+
+        const apiKeyInput =
+            document.getElementById('apiKey');
 
         togglePassword.addEventListener('click', function () {
-            const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password';
+
+            const type =
+                apiKeyInput.getAttribute('type') === 'password'
+                ? 'text'
+                : 'password';
+
             apiKeyInput.setAttribute('type', type);
-            this.innerText = type === 'password' ? '👁️' : '🚫';
+
+            this.innerText =
+                type === 'password'
+                ? '👁️'
+                : '🚫';
+
         });
 
-        // --- FITUR BARU: PANDUAN TOGGLE ---
-        const guideBox = document.getElementById('guideBox');
+
+        // ==========================================
+        // PANDUAN TOGGLE
+        // ==========================================
+
+        const guideBox =
+            document.getElementById('guideBox');
+
         guideBox.addEventListener('click', () => {
+
             guideBox.classList.toggle('active');
+
         });
 
-        // --- IKLAN FLOATING MUNCUL SETELAH 10 DETIK ---
+
+        // ==========================================
+        // IKLAN FLOATING
+        // MUNCUL SETELAH 10 DETIK
+        // ==========================================
+
         setTimeout(() => {
-            document.getElementById('floatAd').classList.add('show');
+
+            const floatAd =
+                document.getElementById('floatAd');
+
+            if (floatAd) {
+                floatAd.classList.add('show');
+            }
+
         }, 10000);
 
-        // --- KODE ASLI ANDA (TANPA POPUNDER) ---
+
+        // ==========================================
+        // KODE APLIKASI ASLI
+        // ==========================================
+
         const MAX_FILES = 5;
         const MAX_VIDEO_SIZE_MB = 5;
 
-        const modelSelect = document.getElementById('modelSelect');
-        const testBtn = document.getElementById('testBtn');
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
-        const uploadContent = document.getElementById('uploadContent');
-        const previewContainer = document.getElementById('previewContainer');
-        const generateBtn = document.getElementById('generateBtn');
-        const resultsList = document.getElementById('resultsList');
-        const toast = document.getElementById('toast');
+        const modelSelect =
+            document.getElementById('modelSelect');
+
+        const testBtn =
+            document.getElementById('testBtn');
+
+        const dropZone =
+            document.getElementById('dropZone');
+
+        const fileInput =
+            document.getElementById('fileInput');
+
+        const uploadContent =
+            document.getElementById('uploadContent');
+
+        const previewContainer =
+            document.getElementById('previewContainer');
+
+        const generateBtn =
+            document.getElementById('generateBtn');
+
+        const resultsList =
+            document.getElementById('resultsList');
+
+        const toast =
+            document.getElementById('toast');
 
         let filesArray = [];
 
+
+        // ==========================================
+        // LOAD SAVED API KEY
+        // ==========================================
+
         window.addEventListener('DOMContentLoaded', () => {
-            const savedKey = localStorage.getItem('zk_api_key');
-            if(savedKey) apiKeyInput.value = savedKey;
+
+            const savedKey =
+                localStorage.getItem('zk_api_key');
+
+            if (savedKey) {
+                apiKeyInput.value = savedKey;
+            }
+
             checkReady();
+
         });
+
 
         apiKeyInput.addEventListener('input', () => {
-            localStorage.setItem('zk_api_key', apiKeyInput.value);
+
+            localStorage.setItem(
+                'zk_api_key',
+                apiKeyInput.value
+            );
+
             checkReady();
+
         });
 
-        // --- UPLOAD LOGIC ---
-        dropZone.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        // ==========================================
+        // UPLOAD LOGIC
+        // ==========================================
+
+        dropZone.addEventListener('click', () => {
+
+            fileInput.click();
+
+        });
+
+
+        fileInput.addEventListener('change', (e) => {
+
+            handleFiles(e.target.files);
+
+        });
+
 
         function handleFiles(files) {
+
             if (files.length > MAX_FILES) {
-                showToast(`Maksimal ${MAX_FILES} file!`, "error");
+
+                showToast(
+                    `Maksimal ${MAX_FILES} file!`,
+                    "error"
+                );
+
                 return;
+
             }
 
-            filesArray = []; 
+            filesArray = [];
+
             previewContainer.innerHTML = '';
+
             previewContainer.style.display = 'flex';
+
             uploadContent.style.display = 'none';
 
+
             Array.from(files).forEach((file) => {
-                if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
-                    showToast("File harus berupa Gambar atau Video!", "error");
+
+                if (
+                    !file.type.startsWith('image/') &&
+                    !file.type.startsWith('video/')
+                ) {
+
+                    showToast(
+                        "File harus berupa Gambar atau Video!",
+                        "error"
+                    );
+
                     return;
+
                 }
+
 
                 if (file.type.startsWith('video/')) {
-                    const sizeMB = file.size / (1024 * 1024);
+
+                    const sizeMB =
+                        file.size / (1024 * 1024);
+
                     if (sizeMB > MAX_VIDEO_SIZE_MB) {
-                        showToast(`Video ${file.name} terlalu besar! Max ${MAX_VIDEO_SIZE_MB}MB.`, "error");
+
+                        showToast(
+                            `Video ${file.name} terlalu besar! Max ${MAX_VIDEO_SIZE_MB}MB.`,
+                            "error"
+                        );
+
                         return;
+
                     }
+
                 }
 
-                const reader = new FileReader();
+
+                const reader =
+                    new FileReader();
+
+
                 reader.onload = (e) => {
+
                     const fileData = {
-                        id: Date.now() + Math.random(),
-                        name: file.name,
-                        base64: e.target.result,
-                        type: file.type
+
+                        id:
+                            Date.now() +
+                            Math.random(),
+
+                        name:
+                            file.name,
+
+                        base64:
+                            e.target.result,
+
+                        type:
+                            file.type
+
                     };
+
+
                     filesArray.push(fileData);
+
                     addThumbnail(fileData);
+
                     checkReady();
+
                 };
+
+
                 reader.readAsDataURL(file);
+
             });
+
         }
+
 
         function addThumbnail(fileData) {
-            const div = document.createElement('div');
-            div.className = 'thumb-item';
+
+            const div =
+                document.createElement('div');
+
+            div.className =
+                'thumb-item';
+
+
             let mediaTag = '';
-            if (fileData.type.startsWith('video/')) {
-                mediaTag = `<video src="${fileData.base64}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`;
+
+
+            if (
+                fileData.type.startsWith('video/')
+            ) {
+
+                mediaTag =
+                    `<video src="${fileData.base64}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`;
+
             } else {
-                mediaTag = `<img src="${fileData.base64}" alt="thumb">`;
+
+                mediaTag =
+                    `<img src="${fileData.base64}" alt="thumb">`;
+
             }
+
+
             div.innerHTML = `
                 ${mediaTag}
-                <div class="remove-thumb" onclick="removeFile('${fileData.id}')">×</div>
+
+                <div class="remove-thumb"
+                     onclick="removeFile('${fileData.id}')">
+                    ×
+                </div>
             `;
+
+
             previewContainer.appendChild(div);
+
         }
+
 
         window.removeFile = function(id) {
-            filesArray = filesArray.filter(f => f.id != id);
+
+            filesArray =
+                filesArray.filter(
+                    f => f.id != id
+                );
+
             previewContainer.innerHTML = '';
-            if(filesArray.length === 0) {
+
+
+            if (filesArray.length === 0) {
+
                 previewContainer.style.display = 'none';
+
                 uploadContent.style.display = 'block';
+
             } else {
+
                 filesArray.forEach(addThumbnail);
+
             }
+
+
             checkReady();
+
         };
 
+
         function checkReady() {
-            generateBtn.disabled = !(filesArray.length > 0 && apiKeyInput.value.trim().length > 0);
+
+            generateBtn.disabled =
+                !(
+                    filesArray.length > 0 &&
+                    apiKeyInput.value.trim().length > 0
+                );
+
         }
 
-        // --- TEST CONNECTION ---
-        testBtn.addEventListener('click', async () => {
-            const key = apiKeyInput.value.trim();
-            const model = modelSelect.value;
-            if (!key) return showToast("Masukkan API Key!", "error");
 
-            const originalText = testBtn.innerText;
-            testBtn.disabled = true;
-            testBtn.innerText = "...";
+        // ==========================================
+        // TEST CONNECTION
+        // ==========================================
 
-            try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
-                const payload = { contents: [{ parts: [{ text: "Test" }] }] };
+        testBtn.addEventListener(
+            'click',
+            async () => {
 
-                const res = await fetch(url, { 
-                    method: "POST", 
-                    headers: { "Content-Type": "application/json" }, 
-                    body: JSON.stringify(payload) 
-                });
+                const key =
+                    apiKeyInput.value.trim();
 
-                if (res.ok) {
-                    showToast("Koneksi Sukses!", "success");
-                    testBtn.classList.add('success');
-                    testBtn.innerText = "OK";
-                } else {
-                    throw new Error("Gagal");
+                const model =
+                    modelSelect.value;
+
+
+                if (!key) {
+
+                    return showToast(
+                        "Masukkan API Key!",
+                        "error"
+                    );
+
                 }
-            } catch (e) {
-                showToast("Koneksi Gagal", "error");
-                testBtn.classList.remove('success');
-                testBtn.innerText = originalText;
-            } finally {
-                if(!testBtn.classList.contains('success')) {
-                    testBtn.disabled = false;
-                    if(testBtn.innerText === "...") testBtn.innerText = originalText;
-                }
-            }
-        });
 
-        // --- BATCH GENERATION LOGIC ---
-        generateBtn.addEventListener('click', async () => {
-            const key = apiKeyInput.value.trim();
-            const model = modelSelect.value;
-            
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = '<span class="spinner"></span> Processing ' + filesArray.length + ' Files...';
-            resultsList.innerHTML = ''; 
 
-            const promises = filesArray.map(async (file) => {
-                const base64Data = file.base64.split(',')[1];
-                const mimeType = file.type;
-                const isVideo = mimeType.startsWith('video/');
+                const originalText =
+                    testBtn.innerText;
 
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
-                
-                let promptInstruction = "";
-                if (isVideo) {
-                    promptInstruction = `Analyze this video clip. Create a detailed prompt for AI video generation (like Sora, Runway, Pika) in **English**.
-                    Describe the motion, action, scene, lighting, camera movement, and style.
-                    **Return ONLY the plain text prompt.**
-                    Do NOT use JSON format.
-                    Do NOT include markdown code blocks.`;
-                } else {
-                    promptInstruction = `Analyze this image and create a detailed prompt for AI image generation (Midjourney, Stable Diffusion, DALL-E) in **English**.
-                    Describe the subject, style, lighting, composition, colors, and mood.
-                    **Return ONLY the plain text prompt.**
-                    Do NOT use JSON format.
-                    Do NOT include markdown code blocks.`;
-                }
-                
-                const payload = {
-                    contents: [{
-                        parts: [
-                            { text: promptInstruction },
-                            { inline_data: { mime_type: mimeType, data: base64Data } }
-                        ]
-                    }]
-                };
+
+                testBtn.disabled = true;
+
+                testBtn.innerText = "...";
+
 
                 try {
-                    const res = await fetch(url, { 
-                        method: "POST", 
-                        headers: { "Content-Type": "application/json" }, 
-                        body: JSON.stringify(payload) 
-                    });
 
-                    if (!res.ok) {
-                        const errJson = await res.json();
-                        throw new Error(errJson.error?.message || "API Error");
+                    const url =
+                        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+
+
+                    const payload = {
+
+                        contents: [
+
+                            {
+
+                                parts: [
+
+                                    {
+                                        text: "Test"
+                                    }
+
+                                ]
+
+                            }
+
+                        ]
+
+                    };
+
+
+                    const res =
+                        await fetch(
+                            url,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(payload)
+                            }
+                        );
+
+
+                    if (res.ok) {
+
+                        showToast(
+                            "Koneksi Sukses!",
+                            "success"
+                        );
+
+                        testBtn.classList.add(
+                            'success'
+                        );
+
+                        testBtn.innerText =
+                            "OK";
+
+                    } else {
+
+                        throw new Error("Gagal");
+
                     }
-                    
-                    const data = await res.json();
-                    let rawText = data.candidates[0].content.parts[0].text;
-                    const cleanText = rawText.replace(/```/g, '').replace(/text/g, '').trim();
-                    
-                    return { success: true, file, data: cleanText };
 
-                } catch (err) {
-                    return { success: false, file, error: err.message };
+
+                } catch (e) {
+
+                    showToast(
+                        "Koneksi Gagal",
+                        "error"
+                    );
+
+                    testBtn.classList.remove(
+                        'success'
+                    );
+
+                    testBtn.innerText =
+                        originalText;
+
+
+                } finally {
+
+                    if (
+                        !testBtn.classList.contains(
+                            'success'
+                        )
+                    ) {
+
+                        testBtn.disabled = false;
+
+                        if (
+                            testBtn.innerText === "..."
+                        ) {
+
+                            testBtn.innerText =
+                                originalText;
+
+                        }
+
+                    }
+
                 }
-            });
 
-            const results = await Promise.all(promises);
+            }
+        );
 
-            results.forEach((result, index) => {
-                if(result.success) {
-                    createResultCard(result.file, result.data, index + 1);
-                } else {
-                    createErrorCard(result.file, result.error, index + 1);
-                }
-            });
 
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '✨ Generate Batch Prompts';
-            showToast("Selesai memproses!", "success");
-        });
+        // ==========================================
+        // BATCH GENERATION
+        // ==========================================
 
-        // --- RENDER FUNCTIONS ---
-        function createResultCard(file, textData, num) {
-            const card = document.createElement('div');
-            card.className = 'result-card';
+        generateBtn.addEventListener(
+            'click',
+            async () => {
+
+                const key =
+                    apiKeyInput.value.trim();
+
+                const model =
+                    modelSelect.value;
+
+
+                generateBtn.disabled = true;
+
+                generateBtn.innerHTML =
+                    '<span class="spinner"></span> Processing ' +
+                    filesArray.length +
+                    ' Files...';
+
+
+                resultsList.innerHTML = '';
+
+
+                const promises =
+                    filesArray.map(
+                        async (file) => {
+
+                            const base64Data =
+                                file.base64.split(',')[1];
+
+                            const mimeType =
+                                file.type;
+
+                            const isVideo =
+                                mimeType.startsWith(
+                                    'video/'
+                                );
+
+
+                            const url =
+                                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+
+
+                            let promptInstruction = "";
+
+
+                            if (isVideo) {
+
+                                promptInstruction =
+                                    `Analyze this video clip. Create a detailed prompt for AI video generation (like Sora, Runway, Pika) in **English**.
+Describe the motion, action, scene, lighting, camera movement, and style.
+**Return ONLY the plain text prompt.**
+Do NOT use JSON format.
+Do NOT include markdown code blocks.`;
+
+                            } else {
+
+                                promptInstruction =
+                                    `Analyze this image and create a detailed prompt for AI image generation (Midjourney, Stable Diffusion, DALL-E) in **English**.
+Describe the subject, style, lighting, composition, colors, and mood.
+**Return ONLY the plain text prompt.**
+Do NOT use JSON format.
+Do NOT include markdown code blocks.`;
+
+                            }
+
+
+                            const payload = {
+
+                                contents: [
+
+                                    {
+
+                                        parts: [
+
+                                            {
+                                                text:
+                                                    promptInstruction
+                                            },
+
+                                            {
+                                                inline_data: {
+                                                    mime_type:
+                                                        mimeType,
+
+                                                    data:
+                                                        base64Data
+                                                }
+                                            }
+
+                                        ]
+
+                                    }
+
+                                ]
+
+                            };
+
+
+                            try {
+
+                                const res =
+                                    await fetch(
+                                        url,
+                                        {
+                                            method:
+                                                "POST",
+
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json"
+                                            },
+
+                                            body:
+                                                JSON.stringify(
+                                                    payload
+                                                )
+                                        }
+                                    );
+
+
+                                if (!res.ok) {
+
+                                    const errJson =
+                                        await res.json();
+
+                                    throw new Error(
+                                        errJson.error?.message ||
+                                        "API Error"
+                                    );
+
+                                }
+
+
+                                const data =
+                                    await res.json();
+
+
+                                let rawText =
+                                    data
+                                        .candidates[0]
+                                        .content
+                                        .parts[0]
+                                        .text;
+
+
+                                const cleanText =
+                                    rawText
+                                        .replace(
+                                            /```/g,
+                                            ''
+                                        )
+                                        .replace(
+                                            /text/g,
+                                            ''
+                                        )
+                                        .trim();
+
+
+                                return {
+                                    success:
+                                        true,
+
+                                    file:
+                                        file,
+
+                                    data:
+                                        cleanText
+                                };
+
+
+                            } catch (err) {
+
+                                return {
+                                    success:
+                                        false,
+
+                                    file:
+                                        file,
+
+                                    error:
+                                        err.message
+                                };
+
+                            }
+
+                        }
+                    );
+
+
+                const results =
+                    await Promise.all(
+                        promises
+                    );
+
+
+                results.forEach(
+                    (result, index) => {
+
+                        if (result.success) {
+
+                            createResultCard(
+                                result.file,
+                                result.data,
+                                index + 1
+                            );
+
+                        } else {
+
+                            createErrorCard(
+                                result.file,
+                                result.error,
+                                index + 1
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                generateBtn.disabled = false;
+
+                generateBtn.innerHTML =
+                    '✨ Generate Batch Prompts';
+
+
+                showToast(
+                    "Selesai memproses!",
+                    "success"
+                );
+
+            }
+        );
+
+
+        // ==========================================
+        // RESULT CARD
+        // ==========================================
+
+        function createResultCard(
+            file,
+            textData,
+            num
+        ) {
+
+            const card =
+                document.createElement('div');
+
+            card.className =
+                'result-card';
+
 
             let mediaTagHTML = '';
-            if (file.type.startsWith('video/')) {
-                mediaTagHTML = `<video src="${file.base64}" class="card-thumb" controls muted></video>`;
+
+
+            if (
+                file.type.startsWith('video/')
+            ) {
+
+                mediaTagHTML =
+                    `<video src="${file.base64}" class="card-thumb" controls muted></video>`;
+
             } else {
-                mediaTagHTML = `<img src="${file.base64}" class="card-thumb" alt="img">`;
+
+                mediaTagHTML =
+                    `<img src="${file.base64}" class="card-thumb" alt="img">`;
+
             }
 
+
             card.innerHTML = `
+
                 <div class="card-header">
+
                     ${mediaTagHTML}
+
                     <div class="card-info">
-                        <div class="card-title">Hasil #${num}: ${file.name}</div>
-                        <textarea class="prompt-box" readonly oncopy="return false;" onpaste="return false;">${textData}</textarea>
+
+                        <div class="card-title">
+                            Hasil #${num}: ${file.name}
+                        </div>
+
+                        <textarea
+                            class="prompt-box"
+                            readonly
+                            oncopy="return false;"
+                            onpaste="return false;"
+                        >${textData}</textarea>
+
                     </div>
+
                 </div>
+
                 <div class="card-actions">
-                    <button class="btn-action copy-btn">📋 Copy Prompt</button>
-                    <button class="btn-action download-btn">💾 Unduh .txt</button>
+
+                    <button class="btn-action copy-btn">
+                        📋 Copy Prompt
+                    </button>
+
+                    <button class="btn-action download-btn">
+                        💾 Unduh .txt
+                    </button>
+
                 </div>
             `;
 
-            const promptBox = card.querySelector('.prompt-box');
 
-            promptBox.addEventListener('selectstart', function(e) {
-                e.preventDefault();
-                return false;
-            });
+            const promptBox =
+                card.querySelector(
+                    '.prompt-box'
+                );
 
-            promptBox.addEventListener('mouseup', function(e) {
-                this.setSelectionRange(0, 0);
-                e.preventDefault();
-            });
 
-            promptBox.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
+            promptBox.addEventListener(
+                'selectstart',
+                function(e) {
 
-            promptBox.addEventListener('focus', function() {
-                this.blur();
-            });
+                    e.preventDefault();
 
-            const copyBtn = card.querySelector('.copy-btn');
-            const downloadBtn = card.querySelector('.download-btn');
+                    return false;
 
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(textData);
-                showToast("Prompt Copied!", "success");
-            });
+                }
+            );
 
-            downloadBtn.addEventListener('click', () => {
-                const blob = new Blob([textData], { type: "text/plain" });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = `zk-prompt-${num}.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                showToast("File Downloaded!", "success");
-            });
 
-            resultsList.appendChild(card);
+            promptBox.addEventListener(
+                'mouseup',
+                function(e) {
+
+                    this.setSelectionRange(
+                        0,
+                        0
+                    );
+
+                    e.preventDefault();
+
+                }
+            );
+
+
+            promptBox.addEventListener(
+                'contextmenu',
+                function(e) {
+
+                    e.preventDefault();
+
+                    return false;
+
+                }
+            );
+
+
+            promptBox.addEventListener(
+                'focus',
+                function() {
+
+                    this.blur();
+
+                }
+            );
+
+
+            const copyBtn =
+                card.querySelector(
+                    '.copy-btn'
+                );
+
+
+            const downloadBtn =
+                card.querySelector(
+                    '.download-btn'
+                );
+
+
+            copyBtn.addEventListener(
+                'click',
+                () => {
+
+                    navigator.clipboard.writeText(
+                        textData
+                    );
+
+                    showToast(
+                        "Prompt Copied!",
+                        "success"
+                    );
+
+                }
+            );
+
+
+            downloadBtn.addEventListener(
+                'click',
+                () => {
+
+                    const blob =
+                        new Blob(
+                            [textData],
+                            {
+                                type:
+                                    "text/plain"
+                            }
+                        );
+
+
+                    const url =
+                        URL.createObjectURL(
+                            blob
+                        );
+
+
+                    const a =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    a.href =
+                        url;
+
+                    a.download =
+                        `zk-prompt-${num}.txt`;
+
+
+                    document.body.appendChild(a);
+
+                    a.click();
+
+                    document.body.removeChild(a);
+
+
+                    URL.revokeObjectURL(url);
+
+
+                    showToast(
+                        "File Downloaded!",
+                        "success"
+                    );
+
+                }
+            );
+
+
+            resultsList.appendChild(
+                card
+            );
+
         }
 
-        function createErrorCard(file, errorMsg, num) {
-            const card = document.createElement('div');
-            card.className = 'result-card';
-            card.style.borderColor = 'var(--error)';
+
+        // ==========================================
+        // ERROR CARD
+        // ==========================================
+
+        function createErrorCard(
+            file,
+            errorMsg,
+            num
+        ) {
+
+            const card =
+                document.createElement('div');
+
+            card.className =
+                'result-card';
+
+
+            card.style.borderColor =
+                'var(--error)';
+
+
             card.innerHTML = `
+
                 <div class="card-header">
-                    <div class="card-thumb" style="background:#333; display:flex; align-items:center; justify-content:center;">❌</div>
-                    <div class="card-info">
-                        <div class="card-title" style="color:var(--error)">Gagal #${num}: ${file.name}</div>
-                        <p style="color:#aaa; font-size:0.9rem;">Error: ${errorMsg}</p>
+
+                    <div
+                        class="card-thumb"
+                        style="
+                            background:#333;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                        "
+                    >
+                        ❌
                     </div>
+
+                    <div class="card-info">
+
+                        <div
+                            class="card-title"
+                            style="color:var(--error)"
+                        >
+                            Gagal #${num}: ${file.name}
+                        </div>
+
+                        <p
+                            style="
+                                color:#aaa;
+                                font-size:0.9rem;
+                            "
+                        >
+                            Error: ${errorMsg}
+                        </p>
+
+                    </div>
+
                 </div>
             `;
-            resultsList.appendChild(card);
+
+
+            resultsList.appendChild(
+                card
+            );
+
         }
 
-        function showToast(msg, type = 'success') {
-            const icon = type === 'success' ? '✅' : '⚠️';
-            document.getElementById('toastIcon').innerText = icon;
-            document.getElementById('toastMsg').innerText = msg;
-            toast.className = `toast show ${type}`;
-            setTimeout(() => toast.classList.remove('show'), 3000);
+
+        // ==========================================
+        // TOAST
+        // ==========================================
+
+        function showToast(
+            msg,
+            type = 'success'
+        ) {
+
+            const icon =
+                type === 'success'
+                ? '✅'
+                : '⚠️';
+
+
+            document.getElementById(
+                'toastIcon'
+            ).innerText =
+                icon;
+
+
+            document.getElementById(
+                'toastMsg'
+            ).innerText =
+                msg;
+
+
+            toast.className =
+                `toast show ${type}`;
+
+
+            setTimeout(
+                () => {
+                    toast.classList.remove(
+                        'show'
+                    );
+                },
+                3000
+            );
+
         }
 
     </script>
