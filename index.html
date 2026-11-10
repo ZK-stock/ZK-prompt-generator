@@ -715,16 +715,18 @@
 
         #previewContainer {
             display: none;
-            flex-wrap: wrap;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
             gap: 14px;
             margin-top: 28px;
-            justify-content: center;
+            width: 100%;
+            justify-content: stretch;
         }
 
         .thumb-item {
             position: relative;
-            width: 96px;
-            height: 96px;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            min-width: 0;
             border-radius: var(--radius-sm);
             overflow: hidden;
             border: 2px solid var(--primary);
@@ -1412,7 +1414,23 @@
                 </label>
 
                 <select id="modelSelect">
-                    <option value="gemini-2.5-flash" selected>
+                    <option value="gemini-3.8-flash" selected>
+                        Gemini 3.8 Flash (Terbaru)
+                    </option>
+
+                    <option value="gemini-3.7-flash">
+                        Gemini 3.7 Flash
+                    </option>
+
+                    <option value="gemini-3.6-flash">
+                        Gemini 3.6 Flash
+                    </option>
+
+                    <option value="gemini-3.5-flash">
+                        Gemini 3.5 Flash
+                    </option>
+
+                    <option value="gemini-2.5-flash">
                         Gemini 2.5 Flash (Support Video)
                     </option>
 
@@ -1451,7 +1469,7 @@
                 </div>
 
                 <div class="upload-text">
-                    Klik untuk pilih hingga 5 File
+                    Klik untuk pilih hingga 10 File
                 </div>
 
                 <div style="font-size:0.8rem; color:var(--text-dim); margin-top:10px;">
@@ -1661,7 +1679,7 @@
         // KODE APLIKASI ASLI
         // ==========================================
 
-        const MAX_FILES = 5;
+        const MAX_FILES = 10;
         const MAX_VIDEO_SIZE_MB = 5;
 
         const modelSelect =
@@ -1692,6 +1710,7 @@
             document.getElementById('toast');
 
         let filesArray = [];
+        let generatedPrompts = [];
 
 
         // ==========================================
@@ -1759,7 +1778,7 @@
 
             previewContainer.innerHTML = '';
 
-            previewContainer.style.display = 'flex';
+            previewContainer.style.display = 'grid';
 
             uploadContent.style.display = 'none';
 
@@ -2086,7 +2105,7 @@
 
 
                 resultsList.innerHTML = '';
-
+                generatedPrompts = [];
 
                 const promises =
                     filesArray.map(
@@ -2266,6 +2285,12 @@ Do NOT include markdown code blocks.`;
 
                         if (result.success) {
 
+                            generatedPrompts.push({
+                                name: result.file.name,
+                                prompt: result.data,
+                                number: index + 1
+                            });
+
                             createResultCard(
                                 result.file,
                                 result.data,
@@ -2286,6 +2311,16 @@ Do NOT include markdown code blocks.`;
                 );
 
 
+                if (generatedPrompts.length > 0) {
+                    const downloadAllBtn = document.createElement('button');
+                    downloadAllBtn.className = 'btn-generate';
+                    downloadAllBtn.type = 'button';
+                    downloadAllBtn.style.marginBottom = '4px';
+                    downloadAllBtn.innerText = '📥 Unduh Semua Prompt (.txt)';
+                    downloadAllBtn.addEventListener('click', downloadAllPrompts);
+                    resultsList.prepend(downloadAllBtn);
+                }
+
                 generateBtn.disabled = false;
 
                 generateBtn.innerHTML =
@@ -2300,6 +2335,29 @@ Do NOT include markdown code blocks.`;
             }
         );
 
+
+        function downloadAllPrompts() {
+            if (!generatedPrompts.length) {
+                showToast("Belum ada prompt untuk diunduh!", "error");
+                return;
+            }
+
+            const combinedText = generatedPrompts
+                .map(item => `PROMPT #${item.number} — ${item.name}\n\n${item.prompt}`)
+                .join('\n\n' + '='.repeat(70) + '\n\n');
+
+            const blob = new Blob([combinedText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'zk-all-prompts.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast("Semua prompt berhasil diunduh!", "success");
+        }
 
         // ==========================================
         // RESULT CARD
